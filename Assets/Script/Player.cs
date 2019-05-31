@@ -10,21 +10,19 @@ public class Player : MonoBehaviour
 
     private del Move;
 
+    private Vector2 beginPos;
+    private Vector2 lastPos;
+
     // Use this for initialization
     private void Start()
     {
-        Move = MoveToJoyStick;
+        Move = MoveToTouch;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (Vector2.Distance(transform.position, Vector2.zero) < 4.25)
-            Move();
-        else
-        {
-            transform.position = transform.position.normalized * 4.24f;
-        }
+        Move();
     }
 
     private void MoveToKeyboard()
@@ -58,10 +56,19 @@ public class Player : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
+                beginPos = Camera.main.ScreenToWorldPoint(touch.position);
             }
             if (touch.phase == TouchPhase.Moved)
             {
-                transform.Translate(touch.deltaPosition.normalized * Time.deltaTime * speed);
+                transform.position = lastPos + (Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos;
+                if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
+                {
+                    transform.position = transform.position.normalized * 4.24f;
+                }
+            }
+            if (touch.phase == TouchPhase.Ended)
+            {
+                lastPos = transform.position;
             }
         }
     }
