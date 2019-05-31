@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{16FC06BA-6595-8EE7-E3DD-569D0DAF976C}</ProjectGuid>
+    <ProjectGuid>{091E8217-F51C-0726-DC5C-2D905E2F6930}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,16 +61,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\CircleSpectrum_V2.cs" />
+    <Compile Include="Assets\Script\GameManager.cs" />
+    <Compile Include="Assets\Script\Player.cs" />
+    <Compile Include="Assets\Script\PoolManager.cs" />
+    <Compile Include="Assets\Script\SoundManager.cs" />
     <Compile Include="Assets\Script\ZigZagSpectrum.cs" />
-    <Compile Include="Assets\Spectrum.cs" />
-    <Compile Include="Assets\Test.cs" />
-    <Compile Include="Assets\Test1.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/YOO/Desktop/UnityProjects/Void Spectrum/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/YOO/Desktop/AAAAAAA/Void-Spectrum/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/YOO/Desktop/UnityProjects/Void Spectrum/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/YOO/Desktop/AAAAAAA/Void-Spectrum/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.1.9f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    public Vector2 dir;
+
+    public float speed;
+
+    // Use this for initialization
+    private void Start()
+    {
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        transform.Translate(dir * Time.deltaTime * speed);
+        if (Vector2.Distance(transform.position, Vector2.zero) > 4.5)
+        {
+            Debug.Log(Vector2.Distance(transform.position, Vector2.zero));
+            PoolManager.instance.PushObject(gameObject);
+        }
+    }
+
+    public void Init(Vector2 spectrum_dir)
+    {
+        dir = spectrum_dir.normalized;
+    }
+
+    private float GetDistance(Vector2 a, Vector2 b)
+    {
+        return Mathf.Pow(a.x - b.x, 2) + Mathf.Pow(a.y - b.y, 2);
+    }
+}
