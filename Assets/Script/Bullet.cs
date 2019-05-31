@@ -19,7 +19,6 @@ public class Bullet : MonoBehaviour
         transform.Translate(dir * Time.deltaTime * speed);
         if (Vector2.Distance(transform.position, Vector2.zero) > 4.5)
         {
-            Debug.Log(Vector2.Distance(transform.position, Vector2.zero));
             PoolManager.instance.PushObject(gameObject);
         }
     }

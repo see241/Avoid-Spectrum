@@ -10,15 +10,10 @@ public class Player : MonoBehaviour
 
     private del Move;
 
-    private Vector2 beginPos;
-
     // Use this for initialization
     private void Start()
     {
-        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
-            Move = MoveToKeyboard;
-        else
-            Move = MoveToTouch;
+        Move = MoveToJoyStick;
     }
 
     // Update is called once per frame
@@ -63,13 +58,17 @@ public class Player : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                beginPos = (Vector2)Camera.main.ScreenToWorldPoint(touch.position);
             }
             if (touch.phase == TouchPhase.Moved)
             {
-                transform.Translate((beginPos - (Vector2)Camera.main.ScreenToWorldPoint(touch.position)).normalized * Time.deltaTime * speed);
+                transform.Translate(touch.deltaPosition.normalized * Time.deltaTime * speed);
             }
         }
+    }
+
+    private void MoveToJoyStick()
+    {
+        transform.Translate(GameManager.instance.moveVec * Time.deltaTime * speed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

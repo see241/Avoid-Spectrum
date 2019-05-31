@@ -507,7 +507,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 457935346}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -729,8 +729,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993c64586c2deb14ab76ac53d9d6767e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joystick: {fileID: 1868799617738500, guid: c9f5622dbff71fa41b62b1868a3d8215, type: 2}
+  joystickBackGround: {fileID: 1279726419852290, guid: b8ea8f9136a387c49bc6540ae75c7883,
+    type: 2}
   dieEffect: {fileID: 198282712456344922, guid: b4d069598b9f25447b1ed68d4b3a7008,
     type: 2}
+  moveVec: {x: 0, y: 0}
 --- !u!4 &528123669
 Transform:
   m_ObjectHideFlags: 0
