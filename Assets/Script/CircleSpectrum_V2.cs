@@ -22,6 +22,9 @@ public class CircleSpectrum_V2 : MonoBehaviour
     [Range(1, 25)]
     public float sensitive;
 
+    [Range(0, 0.2f)]
+    public float diff;
+
     public int radius;
 
     private List<LineRenderer> lines = new List<LineRenderer>();
@@ -63,6 +66,7 @@ public class CircleSpectrum_V2 : MonoBehaviour
             if (SpectrumData[i] > 0.05 && !coolTime[i])
             {
                 GameObject poppingBullet = PoolManager.instance.PopObject();
+                PoolManager.instance.listed.Add(poppingBullet);
                 poppingBullet.transform.position = lines[i].GetPosition(1);
                 poppingBullet.GetComponent<Bullet>().Init(lines[i].GetPosition(1) - lines[i].GetPosition(0));
                 StartCoroutine(iStartCooltime(i));

@@ -6,12 +6,20 @@ public class PoolManager : MonoBehaviour
 {
     public static PoolManager instance;
     private List<GameObject> list = new List<GameObject>();
+    public List<GameObject> listed = new List<GameObject>();
+
     public int listCount;
     public GameObject go;
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
@@ -29,7 +37,7 @@ public class PoolManager : MonoBehaviour
     {
         for (int i = 0; i < listCount; i++)
         {
-            PushObject(Instantiate(go));
+            PushObject(Instantiate(go, transform));
         }
     }
 
@@ -40,17 +48,27 @@ public class PoolManager : MonoBehaviour
             GameObject poolingObejct = list[0];
             list.RemoveAt(0);
             poolingObejct.SetActive(true);
+            listed.Add(poolingObejct);
             return poolingObejct;
         }
         else
         {
-            return Instantiate(go);
+            return Instantiate(go, transform);
         }
     }
 
     public void PushObject(GameObject _go)
     {
-        list.Add(_go);
         _go.SetActive(false);
+        list.Add(_go);
+        listed.Remove(_go);
+    }
+
+    public void CleanPool()
+    {
+        while (listed.Count > 0)
+        {
+            PushObject(listed[0]);
+        }
     }
 }

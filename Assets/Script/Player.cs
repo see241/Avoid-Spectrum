@@ -16,7 +16,10 @@ public class Player : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        Move = MoveToTouch;
+        if (InGameManager.instance.controlType == ControlType.Joystick)
+            Move = MoveToJoyStick;
+        else
+            Move = MoveToTouch;
     }
 
     // Update is called once per frame
@@ -60,10 +63,13 @@ public class Player : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Moved)
             {
-                transform.position = lastPos + (Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos;
-                if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
+                if (!InGameManager.instance.isPause)
                 {
-                    transform.position = transform.position.normalized * 4.24f;
+                    transform.position = lastPos + (Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos;
+                    if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
+                    {
+                        transform.position = transform.position.normalized * 4.24f;
+                    }
                 }
             }
             if (touch.phase == TouchPhase.Ended)
@@ -75,12 +81,12 @@ public class Player : MonoBehaviour
 
     private void MoveToJoyStick()
     {
-        transform.Translate(GameManager.instance.moveVec * Time.deltaTime * speed);
+        transform.Translate(Joystick.instance.moveVec * Time.deltaTime * speed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameManager.instance.PlayerDie(gameObject);
+        InGameManager.instance.PlayerDie(gameObject);
         Destroy(gameObject);
     }
 }

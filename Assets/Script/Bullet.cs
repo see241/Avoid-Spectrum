@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public Vector2 dir;
 
     public float speed;
+    private float _speed;
 
     // Use this for initialization
     private void Start()
@@ -16,7 +17,12 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        transform.Translate(dir * Time.deltaTime * speed);
+        if (!InGameManager.instance.isPause)
+            transform.Translate(dir * Time.deltaTime * speed);
+        else
+        {
+            Debug.Log("now pausing");
+        }
         if (Vector2.Distance(transform.position, Vector2.zero) > 4.5)
         {
             PoolManager.instance.PushObject(gameObject);
