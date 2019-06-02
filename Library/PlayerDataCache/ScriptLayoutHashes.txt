@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/YOO/Desktop/UnityProjects/Void Spectrum/v0.55.apk
+C:/Users/YOO/Desktop/UnityProjects/Void Spectrum/v0.6.apk
 SceneListBegin?
 Assets/Scenes/Menu.unity
 Assets/Scenes/GameScene.unity
@@ -114,13 +114,14 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 b4e411ee5757c77223a564277838cc31 Assembly-CSharp.dll:.PoolManager
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
+9f249f06474e52f5a6ce54ec4c6060de Assembly-CSharp.dll:.MenuManager
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 dd5481137759597d614818793c90a7fe Assembly-CSharp.dll:.Player
-0a737e74cb3dce5740a8528015d3b619 Assembly-CSharp.dll:.InGameManager
+dfda8698f4398c48bc1c04bd3264a39d Assembly-CSharp.dll:.InGameManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -135,7 +136,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-438debce9205cbe86cd7da44f065cbb0 Assembly-CSharp.dll:.CircleSpectrum_V2
+65b3efc138d20123c658273a70ddb195 Assembly-CSharp.dll:.CircleSpectrum_V2
 b1f3012ec89f67f1a6fe39dfb538f989 Assembly-CSharp.dll:.ZigZagSpectrum
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -154,7 +155,6 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+3e6672d5b78ad579220ea5d8c7d50007 Assembly-CSharp.dll:.PanelSort
 f7648d0b4d95df250bebd88ecdac4492 Assembly-CSharp.dll:.SoundManager
 6fc5ca644743b74be567cbf30e2bc4e1 Assembly-CSharp.dll:.UIManager
-38ac537f1b53888db9781615bf27245b Assembly-CSharp.dll:.MenuManager
-3e6672d5b78ad579220ea5d8c7d50007 Assembly-CSharp.dll:.PanelSort

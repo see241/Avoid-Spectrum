@@ -15,21 +15,35 @@ public class SoundManager : MonoBehaviour
     public TextMesh text;
 
     public AudioSource curSong;
+    private IEnumerator iStartGame;
+    private Coroutine co;
 
     private void Awake()
     {
         instance = this;
+        iStartGame = StartGame();
     }
 
     // Use this for initialization
     private void Start()
     {
-        StartCoroutine(StartScene());
     }
 
     // Update is called once per frame
     private void Update()
     {
+    }
+
+    public void InitScene()
+    {
+        StartCoroutine(iStartGame);
+    }
+
+    public void CloseScene()
+    {
+        StopCoroutine(iStartGame);
+        iStartGame = StartGame();
+        InGameManager.instance.isMusicStarted = false;
     }
 
     public void SetUIInfo()
@@ -70,15 +84,23 @@ public class SoundManager : MonoBehaviour
         curSong.UnPause();
     }
 
-    private IEnumerator StartScene()
+    public void MenuHighlightPlay(float t)
     {
+        SoundChage(InGameManager.instance.curSongName);
+        curSong.time = t;
+    }
+
+    private IEnumerator StartGame()
+    {
+        Debug.Log("StartGame");
         for (int i = 0; i < 3; i++)
         {
             TextMesh _text = Instantiate(text);
             _text.text = (3 - i).ToString();
+            Destroy(_text.gameObject, 1);
             yield return new WaitForSeconds(1f);
-            Destroy(_text.gameObject);
         }
         SoundChage(InGameManager.instance.curSongName);
+        InGameManager.instance.isMusicStarted = true;
     }
 }

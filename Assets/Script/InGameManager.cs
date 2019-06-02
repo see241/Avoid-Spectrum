@@ -12,19 +12,54 @@ public enum ControlType
     Touch, Joystick
 }
 
+public enum GameState
+{
+    Main, Menu, InGame
+}
+
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager instance;
     public ParticleSystem dieEffect;
 
+    public List<GameObject> uiList;
+    public List<GameObject> objectList;
     public GameObject dieMenu;
 
     public bool isPause;
+
+    public bool isMusicStarted;
 
     public string curSongName;
 
     public Difficulty difficulty;
     public ControlType controlType;
+    public GameState gs;
+
+    public GameState state
+    {
+        get { return gs; }
+        set
+        {
+            gs = value;
+            for (int i = 0; i < uiList.Count; i++)
+            {
+                uiList[i].SetActive(false);
+                objectList[i].SetActive(false);
+            }
+            uiList[(int)gs].SetActive(true);
+            objectList[(int)gs].SetActive(true);
+            if (gs == GameState.InGame)
+            {
+                SoundManager.instance.InitScene();
+            }
+            if (SoundManager.instance.curSong != null)
+            {
+                SoundManager.instance.curSong.Stop();
+                SoundManager.instance.curSong.time = 0;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -48,6 +83,7 @@ public class InGameManager : MonoBehaviour
         {
             controlType = ControlType.Touch;
         }
+        state = GameState.Menu;
         isPause = false;
     }
 

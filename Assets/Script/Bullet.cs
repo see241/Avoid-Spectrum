@@ -19,12 +19,9 @@ public class Bullet : MonoBehaviour
     {
         if (!InGameManager.instance.isPause)
             transform.Translate(dir * Time.deltaTime * speed);
-        else
-        {
-            Debug.Log("now pausing");
-        }
         if (Vector2.Distance(transform.position, Vector2.zero) > 4.5)
         {
+            Debug.Log(Vector2.Distance(transform.position, Vector2.zero));
             PoolManager.instance.PushObject(gameObject);
         }
     }

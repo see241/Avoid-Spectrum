@@ -29,11 +29,11 @@ public class PanelSort : MonoBehaviour
 
     private IEnumerator SortPos()
     {
-        Vector2 sortingPos = new Vector2(index * 768, 33);
+        Vector2 sortingPos = new Vector2(index * 768, 0);
         for (int i = 0; i < 15; i++)
         {
             rt.anchoredPosition = Vector2.Lerp(rt.anchoredPosition, sortingPos, 0.5f);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     public List<GameObject> panels = new List<GameObject>();
+    public List<float> hightTimes = new List<float>();
     public int idx;
+    public Button left;
+    public Button right;
 
     public int index
     {
@@ -22,15 +25,39 @@ public class MenuManager : MonoBehaviour
             {
                 panels[idx - 1].GetComponent<PanelSort>().index = -1;
                 panels[idx - 1].SetActive(true);
+                left.interactable = true;
+                if (PlayerPrefs.HasKey(panels[idx - 1] + "Score"))
+                {
+                    panels[idx - 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx - 1] + "Score") + "%";
+                }
             }
+            else
+            {
+                left.interactable = false;
+            }
+
             panels[idx].GetComponent<PanelSort>().index = 0;
             panels[idx].SetActive(true);
+            if (PlayerPrefs.HasKey(panels[idx] + "Score"))
+            {
+                panels[idx].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx] + "Score") + "%";
+            }
             if (index < panels.Count - 1)
             {
                 panels[idx + 1].GetComponent<PanelSort>().index = 1;
                 panels[idx + 1].SetActive(true);
+                right.interactable = true;
+                if (PlayerPrefs.HasKey(panels[idx + 1] + "Score"))
+                {
+                    panels[idx + 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx + 1] + "Score") + "%";
+                }
+            }
+            else
+            {
+                right.interactable = false;
             }
             InGameManager.instance.curSongName = panels[idx].name;
+            SoundManager.instance.MenuHighlightPlay(hightTimes[idx]);
         }
     }
 
@@ -59,16 +86,6 @@ public class MenuManager : MonoBehaviour
 
     public void ChangeScene()
     {
-        StartCoroutine(_ChangeScene());
-    }
-
-    private IEnumerator _ChangeScene()
-    {
-        AsyncOperation async = SceneManager.LoadSceneAsync("GameScene");
-        while (!async.isDone)
-        {
-            Debug.Log(async.progress);
-            yield return null;
-        }
+        InGameManager.instance.state = GameState.InGame;
     }
 }

@@ -29,7 +29,7 @@ public class ZigZagSpectrum : MonoBehaviour
     {
         line.positionCount = spectrumCnt;
         int index = -spectrumCnt / 2;
-        line = Instantiate(line);
+        line = Instantiate(line, transform);
         for (int i = 0; i < spectrumCnt; i++)
         {
             targetGrids.Add(Instantiate(emptyObject, transform));

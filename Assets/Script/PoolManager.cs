@@ -48,7 +48,6 @@ public class PoolManager : MonoBehaviour
             GameObject poolingObejct = list[0];
             list.RemoveAt(0);
             poolingObejct.SetActive(true);
-            listed.Add(poolingObejct);
             return poolingObejct;
         }
         else

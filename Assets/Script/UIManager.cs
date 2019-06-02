@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
             SoundManager.instance.SoundPause();
             InGameManager.instance.isPause = true;
             pauseMenu.SetActive(true);
+            SoundManager.instance.SetUIInfo();
         }
     }
 
@@ -37,14 +38,20 @@ public class UIManager : MonoBehaviour
         InGameManager.instance.isPause = false;
         pauseMenu.SetActive(false);
         PoolManager.instance.CleanPool();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SoundManager.instance.CloseScene();
+        SoundManager.instance.InitScene();
     }
 
     public void BackHome()
     {
         Time.timeScale = 1;
         PoolManager.instance.CleanPool();
-        SceneManager.LoadScene("Menu");
+        SoundManager.instance.AllSoundStop();
+        SoundManager.instance.CloseScene();
+        PoolManager.instance.CleanPool();
+        InGameManager.instance.isPause = false;
+        pauseMenu.SetActive(false);
+        InGameManager.instance.state = GameState.Menu;
     }
 
     public void Resume()
