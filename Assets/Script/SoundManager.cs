@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     public Text score;
     public Text _title;
     public Text title;
+    public int curSongScore;
 
     public TextMesh text;
 
@@ -41,8 +42,10 @@ public class SoundManager : MonoBehaviour
 
     public void CloseScene()
     {
+        curSong.volume = 1;
         StopCoroutine(iStartGame);
         iStartGame = StartGame();
+        AllSoundStop();
         InGameManager.instance.isMusicStarted = false;
     }
 
@@ -51,6 +54,18 @@ public class SoundManager : MonoBehaviour
         progressBar.value = curSong.time / curSong.clip.length;
         _progressBar.value = progressBar.value;
         score.text = ((int)(_progressBar.value * 100)) + "%";
+        curSongScore = (int)(_progressBar.value * 100);
+        if (PlayerPrefs.HasKey(InGameManager.instance.curSongName + "Score"))
+        {
+            if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + "Score") < curSongScore)
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
+        }
+        PlayerPrefs.Save();
+        Debug.Log(PlayerPrefs.GetInt(InGameManager.instance.curSongName + "Score"));
     }
 
     public void SoundChage(string a)
@@ -92,7 +107,7 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator StartGame()
     {
-        Debug.Log("StartGame");
+        Player.instance.gameObject.SetActive(true);
         for (int i = 0; i < 3; i++)
         {
             TextMesh _text = Instantiate(text);
@@ -101,6 +116,7 @@ public class SoundManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         SoundChage(InGameManager.instance.curSongName);
+        curSong.volume = 1;
         InGameManager.instance.isMusicStarted = true;
     }
 }

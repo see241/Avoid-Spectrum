@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
         set
         {
             idx = value;
+            InGameManager.instance.curSongName = panels[idx].name;
             for (int i = 0; i < panels.Count; i++)
             {
                 panels[i].SetActive(false);
@@ -26,9 +27,9 @@ public class MenuManager : MonoBehaviour
                 panels[idx - 1].GetComponent<PanelSort>().index = -1;
                 panels[idx - 1].SetActive(true);
                 left.interactable = true;
-                if (PlayerPrefs.HasKey(panels[idx - 1] + "Score"))
+                if (PlayerPrefs.HasKey(panels[idx - 1].name + "Score"))
                 {
-                    panels[idx - 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx - 1] + "Score") + "%";
+                    panels[idx - 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx - 1].name + "Score") + "%";
                 }
             }
             else
@@ -38,16 +39,17 @@ public class MenuManager : MonoBehaviour
 
             panels[idx].GetComponent<PanelSort>().index = 0;
             panels[idx].SetActive(true);
-            if (PlayerPrefs.HasKey(panels[idx] + "Score"))
+            if (PlayerPrefs.HasKey(panels[idx].name + "Score"))
             {
-                panels[idx].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx] + "Score") + "%";
+                panels[idx].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(InGameManager.instance.curSongName + "Score") + "%";
             }
+
             if (index < panels.Count - 1)
             {
                 panels[idx + 1].GetComponent<PanelSort>().index = 1;
                 panels[idx + 1].SetActive(true);
                 right.interactable = true;
-                if (PlayerPrefs.HasKey(panels[idx + 1] + "Score"))
+                if (PlayerPrefs.HasKey(panels[idx + 1].name + "Score"))
                 {
                     panels[idx + 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx + 1] + "Score") + "%";
                 }
@@ -56,7 +58,6 @@ public class MenuManager : MonoBehaviour
             {
                 right.interactable = false;
             }
-            InGameManager.instance.curSongName = panels[idx].name;
             SoundManager.instance.MenuHighlightPlay(hightTimes[idx]);
         }
     }

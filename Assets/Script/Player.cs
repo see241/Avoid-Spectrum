@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
     public float speed;
 
     private delegate void del();
@@ -12,6 +13,11 @@ public class Player : MonoBehaviour
 
     private Vector2 beginPos;
     private Vector2 lastPos;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     private void Start()
@@ -87,6 +93,6 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         InGameManager.instance.PlayerDie(gameObject);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

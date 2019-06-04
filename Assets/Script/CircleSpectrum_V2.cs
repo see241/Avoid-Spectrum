@@ -61,7 +61,6 @@ public class CircleSpectrum_V2 : MonoBehaviour
 
             Vector3 targetVec = spectrumPos[i] + targetGrids[i].transform.up * minLen + targetGrids[i].transform.up * targetPos;
             targetGrids[i].transform.position = Vector3.MoveTowards(targetGrids[i].transform.position, targetVec, 0.1f);
-            targetGrids[i].transform.name = SpectrumData[i].ToString();
             lines[i].SetPosition(1, targetGrids[i].transform.position);
             if (InGameManager.instance.isMusicStarted)
             {

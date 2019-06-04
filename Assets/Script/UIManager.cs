@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject dieMenu;
 
     public TextMesh text;
 
@@ -37,9 +38,12 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         InGameManager.instance.isPause = false;
         pauseMenu.SetActive(false);
+        dieMenu.SetActive(false);
         PoolManager.instance.CleanPool();
         SoundManager.instance.CloseScene();
         SoundManager.instance.InitScene();
+        Player.instance.gameObject.SetActive(true);
+        Player.instance.transform.position = Vector2.zero;
     }
 
     public void BackHome()
@@ -51,7 +55,9 @@ public class UIManager : MonoBehaviour
         PoolManager.instance.CleanPool();
         InGameManager.instance.isPause = false;
         pauseMenu.SetActive(false);
+        dieMenu.SetActive(false);
         InGameManager.instance.state = GameState.Menu;
+        GameObject.Find("MenuManager").GetComponent<MenuManager>().index = GameObject.Find("MenuManager").GetComponent<MenuManager>().index;
     }
 
     public void Resume()

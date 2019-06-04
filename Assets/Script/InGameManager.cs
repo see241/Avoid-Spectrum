@@ -34,7 +34,7 @@ public class InGameManager : MonoBehaviour
 
     public Difficulty difficulty;
     public ControlType controlType;
-    public GameState gs;
+    private GameState gs;
 
     public GameState state
     {

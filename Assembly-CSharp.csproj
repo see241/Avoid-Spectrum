@@ -64,6 +64,7 @@
     <Compile Include="Assets\PanelSort.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\CircleSpectrum_V2.cs" />
+    <Compile Include="Assets\Script\CircleSpectrum_V3.cs" />
     <Compile Include="Assets\Script\Debug_.cs" />
     <Compile Include="Assets\Script\InGameManager.cs" />
     <Compile Include="Assets\Script\Joystick.cs" />
