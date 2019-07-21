@@ -18,8 +18,11 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         if (!InGameManager.instance.isPause)
+        {
+            speed = CircleSpectrum_V3.instance.applyBulletSpeed + 0.1f;
             transform.Translate(dir * Time.deltaTime * speed);
-        if (Vector2.Distance(transform.position, Vector2.zero) <= 0.1f)
+        }
+        if (Vector2.Distance(transform.position, Vector2.zero) > 4.5f)
         {
             PoolManager.instance.PushObject(gameObject);
         }

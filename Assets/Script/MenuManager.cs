@@ -89,4 +89,9 @@ public class MenuManager : MonoBehaviour
     {
         InGameManager.instance.state = GameState.InGame;
     }
+
+    public void GameStart()
+    {
+        InGameManager.instance.state = GameState.Menu;
+    }
 }

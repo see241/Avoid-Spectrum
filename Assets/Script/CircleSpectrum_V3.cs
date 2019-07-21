@@ -11,9 +11,13 @@ public class CircleSpectrum_V3 : MonoBehaviour
     private List<GameObject> spectrumPos = new List<GameObject>();
     public int spectrumCnt;
 
-    private float sens;
+    private float[] preSpectrum;
+
+    public float sens;
     public float rotateSpeed;
-    private bool rotateCooltime;
+    private bool isReverseCooltime;
+
+    public float reverseCooltime;
     private int sw = 1;
 
     [SerializeField]
@@ -27,7 +31,13 @@ public class CircleSpectrum_V3 : MonoBehaviour
     [Range(1, 25)]
     public float sensitive;
 
-    [Range(0, 0.2f)]
+    [HideInInspector]
+    public float applyBulletSpeed;
+
+    public float bulletSpeed;
+    public float defaultBulletSpeed;
+
+    [Range(0, 1f)]
     public float diff;
 
     public float radius;
@@ -43,6 +53,7 @@ public class CircleSpectrum_V3 : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        preSpectrum = new float[spectrumCnt];
         linePrefab.positionCount = 2;
         for (int i = 0; i < spectrumCnt; i++)
         {
@@ -59,39 +70,47 @@ public class CircleSpectrum_V3 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        float[] SpectrumData = AudioListener.GetSpectrumData(2048, 0, FFTWindow.Hamming);
+        float[] SpectrumData = AudioListener.GetSpectrumData(1024, 0, FFTWindow.Hamming);
         for (int i = 0; i < spectrumCnt; i++)
         {
             sens += SpectrumData[i];
             float targetPos = SpectrumData[i] * sensitive;
 
             Vector3 targetVec = targetGrids[i].transform.position + targetGrids[i].transform.up * minLen + targetGrids[i].transform.up * targetPos;
-            spectrumPos[i].transform.position = Vector3.MoveTowards(spectrumPos[i].transform.position, targetVec, 0.1f);
+            spectrumPos[i].transform.position = Vector3.MoveTowards(spectrumPos[i].transform.position, targetVec, 0.07f);
+            //spectrumPos[i].transform.position = targetVec;
             lines[i].SetPosition(0, targetGrids[i].transform.position);
             lines[i].SetPosition(1, spectrumPos[i].transform.position);
             if (InGameManager.instance.isMusicStarted)
             {
-                if (SpectrumData[i] > 0.05 && !coolTime[i])
+                if (SpectrumData[i] - preSpectrum[i] > diff / 2) coolTime[i] = false;
+                if (SpectrumData[i] > diff && !coolTime[i])
                 {
                     GameObject poppingBullet = PoolManager.instance.PopObject();
                     PoolManager.instance.listed.Add(poppingBullet);
                     poppingBullet.transform.position = lines[i].GetPosition(1);
                     poppingBullet.GetComponent<Bullet>().Init(lines[i].GetPosition(1) - lines[i].GetPosition(0));
+                    poppingBullet.GetComponent<Bullet>().speed = SpectrumData[i] * bulletSpeed;
                     StartCoroutine(iStartCooltime(i));
                 }
+
+                preSpectrum[i] = SpectrumData[i];
             }
         }
+        Debug.Log(sens);
         if (InGameManager.instance.state == GameState.InGame)
         {
-            if (sens > 2.5 && rotateCooltime == false)
+            if (sens > 2.5 && isReverseCooltime == false)
             {
                 sw *= -1;
                 StartCoroutine(StartCooltime());
                 Debug.Log("reverse");
             }
-            rotateSpeed = Mathf.MoveTowards(rotateSpeed, sens * 45 * sw, 25);
+            //rotateSpeed = Mathf.MoveTowards(rotateSpeed, sens * 45 * sw, 1);
+            rotateSpeed = sens * 30 * sw;
             transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
         }
+        applyBulletSpeed = sens / 2 * bulletSpeed;
         sens = 0;
     }
 
@@ -104,8 +123,8 @@ public class CircleSpectrum_V3 : MonoBehaviour
 
     private IEnumerator StartCooltime()
     {
-        rotateCooltime = true;
-        yield return new WaitForSeconds(0.1f);
-        rotateCooltime = false;
+        isReverseCooltime = true;
+        yield return new WaitForSeconds(reverseCooltime);
+        isReverseCooltime = false;
     }
 }

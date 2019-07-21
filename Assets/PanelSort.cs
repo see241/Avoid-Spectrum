@@ -25,6 +25,10 @@ public class PanelSort : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (index == 0)
+        {
+            Selector.instance.key.button = transform.GetChild(1).GetComponent<UnityEngine.UI.Button>();
+        }
     }
 
     private IEnumerator SortPos()

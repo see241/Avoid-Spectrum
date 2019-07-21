@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         if (InGameManager.instance.controlType == ControlType.Joystick)
             Move = MoveToJoyStick;
         else
-            Move = MoveToTouch;
+            Move = MoveToKeyboard;
     }
 
     // Update is called once per frame
@@ -55,6 +55,11 @@ public class Player : MonoBehaviour
         }
 
         transform.Translate(new Vector2(vX, vY).normalized * Time.deltaTime * speed);
+        if (Vector2.Distance(transform.position, Vector2.zero) > 4.4)
+        {
+            InGameManager.instance.PlayerDie(gameObject);
+            gameObject.SetActive(false);
+        }
     }
 
     private void MoveToTouch()

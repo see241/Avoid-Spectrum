@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     public Text score;
     public Text _title;
     public Text title;
+    public Text title_;
     public int curSongScore;
 
     public TextMesh text;
@@ -18,6 +19,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource curSong;
     private IEnumerator iStartGame;
     private Coroutine co;
+
+    public bool isClear;
 
     private void Awake()
     {
@@ -33,6 +36,10 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (InGameManager.instance.state == GameState.InGame && !curSong.isPlaying && !InGameManager.instance.isPause && InGameManager.instance.isMusicStarted && !isClear)
+        {
+            isClear = true;
+        }
     }
 
     public void InitScene()
@@ -57,12 +64,19 @@ public class SoundManager : MonoBehaviour
         curSongScore = (int)(_progressBar.value * 100);
         if (PlayerPrefs.HasKey(InGameManager.instance.curSongName + "Score"))
         {
+            if (isClear)
+            {
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", 100);
+            }
             if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + "Score") < curSongScore)
                 PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
         }
         else
         {
-            PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
+            if (isClear)
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", 100);
+            if (!isClear)
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
         }
         PlayerPrefs.Save();
         Debug.Log(PlayerPrefs.GetInt(InGameManager.instance.curSongName + "Score"));
@@ -78,6 +92,7 @@ public class SoundManager : MonoBehaviour
         curSong.Play();
         _title.text = a;
         title.text = a;
+        title_.text = a;
     }
 
     public void AllSoundStop()
@@ -91,7 +106,9 @@ public class SoundManager : MonoBehaviour
     public void SoundPause()
     {
         if (curSong != null)
+        {
             curSong.Pause();
+        }
     }
 
     public void SoundResume()

@@ -27,6 +27,8 @@ public class InGameManager : MonoBehaviour
     public GameObject dieMenu;
 
     public bool isPause;
+    private bool stopFlag;
+    public GameObject pauseButton;
 
     public bool isMusicStarted;
 
@@ -41,6 +43,10 @@ public class InGameManager : MonoBehaviour
         get { return gs; }
         set
         {
+            if (gs == GameState.Main)
+            {
+                stopFlag = true;
+            }
             gs = value;
             for (int i = 0; i < uiList.Count; i++)
             {
@@ -52,12 +58,18 @@ public class InGameManager : MonoBehaviour
             if (gs == GameState.InGame)
             {
                 SoundManager.instance.InitScene();
+                Player.instance.transform.position = Vector2.zero;
             }
             if (SoundManager.instance.curSong != null)
             {
-                SoundManager.instance.curSong.Stop();
-                SoundManager.instance.curSong.time = 0;
+                if (!stopFlag)
+                {
+                    SoundManager.instance.curSong.Stop();
+                    SoundManager.instance.curSong.time = 0;
+                }
             }
+            stopFlag = false;
+            SoundManager.instance.isClear = false;
         }
     }
 
@@ -68,6 +80,7 @@ public class InGameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -83,7 +96,7 @@ public class InGameManager : MonoBehaviour
         {
             controlType = ControlType.Touch;
         }
-        state = GameState.Menu;
+        state = GameState.Main;
         isPause = false;
     }
 
@@ -99,8 +112,8 @@ public class InGameManager : MonoBehaviour
         Destroy(ptc, ptc.duration + ptc.startLifetime);
         SoundManager.instance.SetUIInfo();
         dieMenu.SetActive(true);
-
-        SoundManager.instance.curSong.volume /= 2;
+        pauseButton.SetActive(false);
+        SoundManager.instance.curSong.volume = 0.5f;
     }
 
     private void ChangeControlType(ControlType type)

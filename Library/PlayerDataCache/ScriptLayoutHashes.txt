@@ -1,6 +1,6 @@
-Android
+WindowsStandalone
 PlayerPath?
-C:/Users/YOO/Desktop/UnityProjects/Void Spectrum/v0.63.apk
+C:/Users/YOO/Desktop/AvoidSpectrum/AvoidSpectrum.exe
 SceneListBegin?
 Assets/Scenes/Menu.unity
 SceneListEnd?
@@ -111,6 +111,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 b4e411ee5757c77223a564277838cc31 Assembly-CSharp.dll:.PoolManager
+5e7c954d9d9518f1b47efa98c05cb425 Assembly-CSharp.dll:.CircleSpectrum_V3
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 58f3734849f3b2ca58edf636dd3e20f7 Assembly-CSharp.dll:.MenuManager
@@ -155,6 +156,6 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 3e6672d5b78ad579220ea5d8c7d50007 Assembly-CSharp.dll:.PanelSort
-9d945defe5107d7ffbdad4f946efb298 Assembly-CSharp.dll:.SoundManager
-25312fdfd609dc38a336962b7149021c Assembly-CSharp.dll:.UIManager
-5ef794dd96a42d87ea1b3a0d228e94dd Assembly-CSharp.dll:.CircleSpectrum_V3
+7c8a9669b49812b56cdea4f99f981274 Assembly-CSharp.dll:.SoundManager
+fba380ec72548e8ea110534c7eadf75d Assembly-CSharp.dll:.UIManager
+b23a3852bb100868cd032bdba296bf0f Assembly-CSharp.dll:.MenuControll
