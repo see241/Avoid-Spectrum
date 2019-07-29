@@ -97,7 +97,6 @@ public class CircleSpectrum_V3 : MonoBehaviour
                 preSpectrum[i] = SpectrumData[i];
             }
         }
-        Debug.Log(sens);
         if (InGameManager.instance.state == GameState.InGame)
         {
             if (sens > 2.5 && isReverseCooltime == false)

@@ -10,7 +10,7 @@ public class SpectrumReact : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         float t = 0;
 
@@ -19,6 +19,6 @@ public class SpectrumReact : MonoBehaviour
         {
             t += SpectrumData[i];
         }
-        transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one * t, 0.02f);
+        transform.localScale = Vector3.Lerp(transform.localScale,Vector3.one*0.5f+Vector3.one * t*0.5f,0.5f);
     }
 }
