@@ -7,6 +7,7 @@ public class CircleSpectrum_V3 : MonoBehaviour
     public static CircleSpectrum_V3 instance;
     private Vector3 world_size;
 
+    public float samplingrateCover;
     private List<GameObject> targetGrids = new List<GameObject>();
     private List<GameObject> spectrumPos = new List<GameObject>();
     public int spectrumCnt;
@@ -74,7 +75,7 @@ public class CircleSpectrum_V3 : MonoBehaviour
         for (int i = 0; i < spectrumCnt; i++)
         {
             sens += SpectrumData[i];
-            float targetPos = SpectrumData[i] * sensitive;
+            float targetPos = SpectrumData[i] * sensitive*samplingrateCover;
 
             Vector3 targetVec = targetGrids[i].transform.position + targetGrids[i].transform.up * minLen + targetGrids[i].transform.up * targetPos;
             spectrumPos[i].transform.position = Vector3.MoveTowards(spectrumPos[i].transform.position, targetVec, 0.07f);
@@ -83,18 +84,18 @@ public class CircleSpectrum_V3 : MonoBehaviour
             lines[i].SetPosition(1, spectrumPos[i].transform.position);
             if (InGameManager.instance.isMusicStarted)
             {
-                if (SpectrumData[i] - preSpectrum[i] > diff / 2) coolTime[i] = false;
-                if (SpectrumData[i] > diff && !coolTime[i])
+                if (SpectrumData[i]*samplingrateCover - preSpectrum[i] > diff / 2) coolTime[i] = false;
+                if (SpectrumData[i]*samplingrateCover > diff && !coolTime[i])
                 {
                     GameObject poppingBullet = PoolManager.instance.PopObject();
                     PoolManager.instance.listed.Add(poppingBullet);
                     poppingBullet.transform.position = lines[i].GetPosition(1);
                     poppingBullet.GetComponent<Bullet>().Init(lines[i].GetPosition(1) - lines[i].GetPosition(0));
-                    poppingBullet.GetComponent<Bullet>().speed = SpectrumData[i] * bulletSpeed;
+                    poppingBullet.GetComponent<Bullet>().speed = SpectrumData[i]*samplingrateCover * bulletSpeed;
                     StartCoroutine(iStartCooltime(i));
                 }
 
-                preSpectrum[i] = SpectrumData[i];
+                preSpectrum[i] = SpectrumData[i]*samplingrateCover;
             }
         }
         if (InGameManager.instance.state == GameState.InGame)

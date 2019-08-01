@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
         for (int i = 0; i < 3; i++)
         {
-            TextMesh _text = Instantiate(text);
+            TextMesh _text = Instantiate(text,transform);
             _text.text = (3 - i).ToString();
             yield return new WaitForSeconds(1f);
             Destroy(_text.gameObject);

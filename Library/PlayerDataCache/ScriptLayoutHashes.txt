@@ -1,6 +1,6 @@
-OSXStandalone
+Android
 PlayerPath?
-/Users/yuseungji/Desktop/UnityBuild.app
+/Users/yuseungji/Desktop/Build.apk
 SceneListBegin?
 Assets/Scenes/Menu.unity
 SceneListEnd?
@@ -113,7 +113,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 b4e411ee5757c77223a564277838cc31 Assembly-CSharp.dll:.PoolManager
-5e7c954d9d9518f1b47efa98c05cb425 Assembly-CSharp.dll:.CircleSpectrum_V3
+c61d242699b4ec474f3ffd9903fae7b1 Assembly-CSharp.dll:.CircleSpectrum_V3
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 58f3734849f3b2ca58edf636dd3e20f7 Assembly-CSharp.dll:.MenuManager
@@ -162,3 +162,4 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 3e6672d5b78ad579220ea5d8c7d50007 Assembly-CSharp.dll:.PanelSort
 7c8a9669b49812b56cdea4f99f981274 Assembly-CSharp.dll:.SoundManager
 889677b1f046cc46ed7c7d0ee298a274 Assembly-CSharp.dll:.UIManager
+650c1e412dac0323d37ae3023565f947 Assembly-CSharp.dll:.TEST_

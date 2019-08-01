@@ -31,6 +31,7 @@ public class SoundManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        CircleSpectrum_V3.instance.samplingrateCover = 44100f/AudioSettings.outputSampleRate;
     }
 
     // Update is called once per frame
@@ -79,7 +80,6 @@ public class SoundManager : MonoBehaviour
                 PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
         }
         PlayerPrefs.Save();
-        Debug.Log(PlayerPrefs.GetInt(InGameManager.instance.curSongName + "Score"));
     }
 
     public void SoundChage(string a)
@@ -127,7 +127,7 @@ public class SoundManager : MonoBehaviour
         Player.instance.gameObject.SetActive(true);
         for (int i = 0; i < 3; i++)
         {
-            TextMesh _text = Instantiate(text);
+            TextMesh _text = Instantiate(text,GameObject.Find("InGameObject").transform);
             _text.text = (3 - i).ToString();
             Destroy(_text.gameObject, 1);
             yield return new WaitForSeconds(1f);
