@@ -7,11 +7,13 @@ public class Bullet : MonoBehaviour
     public Vector2 dir;
 
     public float speed;
+    Transform tf;
     private float _speed;
-
+    const float powedDistance = 20.25f;
     // Use this for initialization
     private void Start()
     {
+        tf =transform;
     }
 
     // Update is called once per frame
@@ -20,9 +22,9 @@ public class Bullet : MonoBehaviour
         if (!InGameManager.instance.isPause)
         {
             speed = CircleSpectrum_V3.instance.applyBulletSpeed + 0.1f;
-            transform.Translate(dir * Time.deltaTime * speed);
+            tf.Translate(dir * Time.deltaTime * speed);
         }
-        if (Vector2.Distance(transform.position, Vector2.zero) > 4.5f)
+        if (GetDistance(tf.position, Vector2.zero) > powedDistance)
         {
             PoolManager.instance.PushObject(gameObject);
         }
@@ -35,6 +37,6 @@ public class Bullet : MonoBehaviour
 
     private float GetDistance(Vector2 a, Vector2 b)
     {
-        return Mathf.Pow(a.x - b.x, 2) + Mathf.Pow(a.y - b.y, 2);
+        return (a.x - b.x)* (a.x - b.x) + (a.y - b.y)* (a.y - b.y);
     }
 }

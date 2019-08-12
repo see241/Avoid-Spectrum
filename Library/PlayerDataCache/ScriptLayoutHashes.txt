@@ -1,6 +1,6 @@
-Android
+OSXStandalone
 PlayerPath?
-/Users/yuseungji/Desktop/Build.apk
+/Users/yuseungji/Desktop/test_gdg.app
 SceneListBegin?
 Assets/Scenes/Menu.unity
 SceneListEnd?
@@ -123,7 +123,8 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 7e3be3a5c935dfbda5381c7d9a74100c Assembly-CSharp.dll:.MenuControll
-dd5481137759597d614818793c90a7fe Assembly-CSharp.dll:.Player
+c6eeb237d9db04de8dce4a2eec230963 Assembly-CSharp.dll:.Player
+650c1e412dac0323d37ae3023565f947 Assembly-CSharp.dll:.TEST_
 102d80c48eb89f9f3eb3b24d2889bb05 Assembly-CSharp.dll:.InGameManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpectrumReact
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -162,4 +163,3 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 3e6672d5b78ad579220ea5d8c7d50007 Assembly-CSharp.dll:.PanelSort
 7c8a9669b49812b56cdea4f99f981274 Assembly-CSharp.dll:.SoundManager
 889677b1f046cc46ed7c7d0ee298a274 Assembly-CSharp.dll:.UIManager
-650c1e412dac0323d37ae3023565f947 Assembly-CSharp.dll:.TEST_

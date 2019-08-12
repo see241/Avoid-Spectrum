@@ -28,11 +28,6 @@ public class PoolManager : MonoBehaviour
         InitPool();
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
     private void InitPool()
     {
         for (int i = 0; i < listCount; i++)
@@ -45,7 +40,7 @@ public class PoolManager : MonoBehaviour
     {
         if (list.Count > 0)
         {
-            GameObject poolingObejct = list[0];
+            GameObject poolingObejct = list[0].gameObject;
             list.RemoveAt(0);
             poolingObejct.SetActive(true);
             return poolingObejct;

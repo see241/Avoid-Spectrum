@@ -54,8 +54,7 @@ public class UIManager : MonoBehaviour
         PoolManager.instance.CleanPool();
         SoundManager.instance.CloseScene();
         SoundManager.instance.InitScene();
-        Player.instance.gameObject.SetActive(true);
-        Player.instance.transform.position = Vector2.zero;
+        Player.instance.Init();
         pauseButton.SetActive(true);
     }
 

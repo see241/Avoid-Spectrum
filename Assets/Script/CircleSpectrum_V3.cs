@@ -84,18 +84,18 @@ public class CircleSpectrum_V3 : MonoBehaviour
             lines[i].SetPosition(1, spectrumPos[i].transform.position);
             if (InGameManager.instance.isMusicStarted)
             {
-                if (SpectrumData[i]*samplingrateCover - preSpectrum[i] > diff / 2) coolTime[i] = false;
-                if (SpectrumData[i]*samplingrateCover > diff && !coolTime[i])
+                if (SpectrumData[i] * samplingrateCover - preSpectrum[i] > diff / 2) coolTime[i] = false;
+                if (SpectrumData[i] * samplingrateCover > diff && !coolTime[i])
                 {
                     GameObject poppingBullet = PoolManager.instance.PopObject();
                     PoolManager.instance.listed.Add(poppingBullet);
                     poppingBullet.transform.position = lines[i].GetPosition(1);
                     poppingBullet.GetComponent<Bullet>().Init(lines[i].GetPosition(1) - lines[i].GetPosition(0));
-                    poppingBullet.GetComponent<Bullet>().speed = SpectrumData[i]*samplingrateCover * bulletSpeed;
+                    poppingBullet.GetComponent<Bullet>().speed = SpectrumData[i] * samplingrateCover * bulletSpeed;
                     StartCoroutine(iStartCooltime(i));
                 }
 
-                preSpectrum[i] = SpectrumData[i]*samplingrateCover;
+                preSpectrum[i] = SpectrumData[i] * samplingrateCover;
             }
         }
         if (InGameManager.instance.state == GameState.InGame)
@@ -110,6 +110,7 @@ public class CircleSpectrum_V3 : MonoBehaviour
             rotateSpeed = sens * 30 * sw;
             transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
         }
+
         applyBulletSpeed = sens / 2 * bulletSpeed;
         sens = 0;
     }

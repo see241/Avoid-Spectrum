@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{091E8217-F51C-0726-DC5C-2D905E2F6930}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/Player.cs">
+    <Files>
+      <File FileName="Assets/Script/PoolManager.cs" Line="8" Column="32" />
+      <File FileName="Assets/Script/CircleSpectrum_V3.cs" Line="117" Column="1" />
+      <File FileName="Assets/Script/InGameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Command.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Player.cs" Line="24" Column="19" NotebookId="1" />
+      <File FileName="Assets/Script/Bullet.cs" Line="27" Column="24" NotebookId="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Void-Spectrum" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Script" expanded="True">
+                <Node name="Player.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="46092293-7108-434d-a1de-0aca1176e884" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
