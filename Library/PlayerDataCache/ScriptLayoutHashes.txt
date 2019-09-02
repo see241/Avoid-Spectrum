@@ -1,6 +1,6 @@
-OSXStandalone
+Android
 PlayerPath?
-/Users/yuseungji/Desktop/test_gdg.app
+/Users/yuseungji/Desktop/Build.apk
 SceneListBegin?
 Assets/Scenes/Menu.unity
 SceneListEnd?
@@ -123,10 +123,8 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 7e3be3a5c935dfbda5381c7d9a74100c Assembly-CSharp.dll:.MenuControll
-c6eeb237d9db04de8dce4a2eec230963 Assembly-CSharp.dll:.Player
-650c1e412dac0323d37ae3023565f947 Assembly-CSharp.dll:.TEST_
-102d80c48eb89f9f3eb3b24d2889bb05 Assembly-CSharp.dll:.InGameManager
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SpectrumReact
+e462f6ceb9d4a5bf7f2280060bddc854 Assembly-CSharp.dll:.Player
+b3e6723cc16795e01375b6994839fcf0 Assembly-CSharp.dll:.InGameManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -141,8 +139,8 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-65b3efc138d20123c658273a70ddb195 Assembly-CSharp.dll:.CircleSpectrum_V2
 b1f3012ec89f67f1a6fe39dfb538f989 Assembly-CSharp.dll:.ZigZagSpectrum
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Command
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -162,4 +160,6 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 3e6672d5b78ad579220ea5d8c7d50007 Assembly-CSharp.dll:.PanelSort
 7c8a9669b49812b56cdea4f99f981274 Assembly-CSharp.dll:.SoundManager
-889677b1f046cc46ed7c7d0ee298a274 Assembly-CSharp.dll:.UIManager
+8be58aa7aa6343c7ba7b873043f4621a Assembly-CSharp.dll:.UIManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:GoogleMobileAds.Common.MobileAdsEventExecutor
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AdMobManager

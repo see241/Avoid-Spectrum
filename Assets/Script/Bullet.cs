@@ -21,8 +21,9 @@ public class Bullet : MonoBehaviour
     {
         if (!InGameManager.instance.isPause)
         {
-            speed = CircleSpectrum_V3.instance.applyBulletSpeed + 0.1f;
-            tf.Translate(dir * Time.deltaTime * speed);
+                speed = CircleSpectrum_V3.instance.applyBulletSpeed + 0.1f;
+                tf.Translate(dir * Time.deltaTime * speed);
+            
         }
         if (GetDistance(tf.position, Vector2.zero) > powedDistance)
         {

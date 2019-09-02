@@ -57,7 +57,9 @@ public class PoolManager : MonoBehaviour
         list.Add(_go);
         listed.Remove(_go);
     }
-
+    public void AllBulletStop()
+    {
+    }
     public void CleanPool()
     {
         while (listed.Count > 0)

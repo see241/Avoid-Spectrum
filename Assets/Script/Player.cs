@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
     public static Player instance;
     public float speed;
-
+    public bool isRevival;
     private delegate void del();
 
     private del Move;
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
         if (InGameManager.instance.controlType == ControlType.Joystick)
             Move = MoveToJoyStick;
         else
-            Move = MoveToKeyboard;
+            Move = MoveToTouch;
     }
 
     // Update is called once per frame
@@ -153,6 +154,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        lastPos = transform.position;
         InGameManager.instance.PlayerDie(gameObject);
         gameObject.SetActive(false);
     }
@@ -178,6 +180,10 @@ public class Player : MonoBehaviour
         yield return StartCoroutine(ColorChange(startColor, skilCoolTime));
         skilCoolBar.gameObject.SetActive(false);
         isCooltime = false;
+    }
+    public void _ColorChange(Color c,float t)
+    {
+        StartCoroutine(ColorChange(c,t));
     }
     IEnumerator ColorChange(Color c, float t)
     {

@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avoid-Spectrum_AdMobAttach", "Assembly-CSharp.csproj", "{452A9ED8-850B-C97E-E2F3-A8422121C299}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avoid-Spectrum_AdMobAttach", "Assembly-CSharp-Editor.csproj", "{41A7B499-A4ED-9FA8-99F5-7BF1ADAAD60E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{452A9ED8-850B-C97E-E2F3-A8422121C299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452A9ED8-850B-C97E-E2F3-A8422121C299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452A9ED8-850B-C97E-E2F3-A8422121C299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452A9ED8-850B-C97E-E2F3-A8422121C299}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A7B499-A4ED-9FA8-99F5-7BF1ADAAD60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A7B499-A4ED-9FA8-99F5-7BF1ADAAD60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A7B499-A4ED-9FA8-99F5-7BF1ADAAD60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A7B499-A4ED-9FA8-99F5-7BF1ADAAD60E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

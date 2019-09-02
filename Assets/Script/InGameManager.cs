@@ -21,7 +21,7 @@ public class InGameManager : MonoBehaviour
 {
     public static InGameManager instance;
     public ParticleSystem dieEffect;
-
+    public GameObject number;
     public List<GameObject> uiList;
     public List<GameObject> objectList;
     public GameObject dieMenu;
@@ -99,10 +99,13 @@ public class InGameManager : MonoBehaviour
         state = GameState.Main;
         isPause = false;
     }
-
-    // Update is called once per frame
-    private void Update()
+    public void Revival()
     {
+        Player.instance.gameObject.SetActive(true);
+        SoundManager.instance.curSong.volume = 1;
+        dieMenu.SetActive(false);
+        pauseButton.SetActive(true);
+        StartCoroutine(PlayerInvisible());
     }
 
     public void PlayerDie(GameObject player)
@@ -114,11 +117,28 @@ public class InGameManager : MonoBehaviour
         dieMenu.SetActive(true);
         pauseButton.SetActive(false);
         SoundManager.instance.curSong.volume = 0.5f;
+        if (!Player.instance.isRevival)
+        {
+            UIManager.instance.StartRevivalTimer();
+            Player.instance.isRevival = true;
+        }
     }
 
     private void ChangeControlType(ControlType type)
     {
         controlType = type;
         PlayerPrefs.SetInt("ControlType", (int)controlType);
+    }
+    IEnumerator PlayerInvisible()
+    {
+        Player.instance.GetComponent<CircleCollider2D>().enabled = false;
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject count = Instantiate(number);
+            count.GetComponent<TextMesh>().text = (3 - i).ToString();
+            Destroy(count, 1);
+            yield return new WaitForSeconds(1);
+        }
+        Player.instance.GetComponent<CircleCollider2D>().enabled = true;
     }
 }
