@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public TextMesh text;
     public Button revivalButton;
     public Image revivalButtonImage;
+    
 
     // Use this for initialization
     private void Awake()
@@ -70,6 +71,7 @@ public class UIManager : MonoBehaviour
     {
         revivalButton.interactable = false;
         AdMobManager.instance.ShowRewardBasedVideo();
+        //InGameManager.instance.Revival();
     }
     public void Clear()
     {

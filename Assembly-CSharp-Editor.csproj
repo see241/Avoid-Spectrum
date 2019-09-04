@@ -310,6 +310,18 @@
     <Reference Include="UnityEditor.OSXStandalone.Extensions">
       <HintPath>/Applications/Unity/Hub/Editor/2018.1.9f2/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.JarResolver_v1.2.124.0">
+      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.124.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl_v1.2.124.0">
+      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.124.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.IOSResolver_v1.2.124.0">
+      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.124.0.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>/Users/yuseungji/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -330,18 +342,6 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.IOSResolver_v1.2.124.0">
-      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.124.0.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.VersionHandlerImpl_v1.2.124.0">
-      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.124.0.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.VersionHandler">
-      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.JarResolver_v1.2.124.0">
-      <HintPath>/Users/yuseungji/Desktop/AdMobAttach/Avoid-Spectrum_AdMobAttach/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.124.0.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/Hub/Editor/2018.1.9f2/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

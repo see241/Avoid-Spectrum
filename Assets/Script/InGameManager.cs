@@ -19,12 +19,14 @@ public enum GameState
 
 public class InGameManager : MonoBehaviour
 {
+    
     public static InGameManager instance;
     public ParticleSystem dieEffect;
     public GameObject number;
     public List<GameObject> uiList;
     public List<GameObject> objectList;
     public GameObject dieMenu;
+    public UnityEngine.UI.Image panel;
 
     public bool isPause;
     private bool stopFlag;
@@ -37,7 +39,16 @@ public class InGameManager : MonoBehaviour
     public Difficulty difficulty;
     public ControlType controlType;
     private GameState gs;
-
+    private int gold;
+    public int Gold
+    {
+        get { return gold; }
+        set
+        {
+            gold = value;
+            PlayerPrefs.SetInt("Gold", gold);
+        }
+    }
     public GameState state
     {
         get { return gs; }
@@ -57,8 +68,16 @@ public class InGameManager : MonoBehaviour
             objectList[(int)gs].SetActive(true);
             if (gs == GameState.InGame)
             {
+                AdMobManager.instance.DestroyBannerAd();
                 SoundManager.instance.InitScene();
                 Player.instance.transform.position = Vector2.zero;
+            }
+            if (gs != GameState.InGame)
+            {
+                if (!AdMobManager.instance.IsBannerOnScreen())
+                {
+                    AdMobManager.instance.RequestBannerAd();
+                }
             }
             if (SoundManager.instance.curSong != null)
             {
@@ -96,13 +115,13 @@ public class InGameManager : MonoBehaviour
         {
             controlType = ControlType.Touch;
         }
+        Gold = PlayerPrefs.GetInt("Gold", 0);
         state = GameState.Main;
         isPause = false;
     }
     public void Revival()
     {
         Player.instance.gameObject.SetActive(true);
-        SoundManager.instance.curSong.volume = 1;
         dieMenu.SetActive(false);
         pauseButton.SetActive(true);
         StartCoroutine(PlayerInvisible());
@@ -132,6 +151,7 @@ public class InGameManager : MonoBehaviour
     IEnumerator PlayerInvisible()
     {
         Player.instance.GetComponent<CircleCollider2D>().enabled = false;
+        panel.gameObject.SetActive(true);
         for (int i = 0; i < 3; i++)
         {
             GameObject count = Instantiate(number);
@@ -139,6 +159,8 @@ public class InGameManager : MonoBehaviour
             Destroy(count, 1);
             yield return new WaitForSeconds(1);
         }
+        panel.gameObject.SetActive(false);
+        SoundManager.instance.curSong.volume = 1;
         Player.instance.GetComponent<CircleCollider2D>().enabled = true;
     }
 }

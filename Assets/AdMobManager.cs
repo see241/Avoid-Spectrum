@@ -7,6 +7,7 @@ public class AdMobManager : MonoBehaviour
 {
     public static AdMobManager instance;
     RewardBasedVideoAd rewardBasedVideoAd;
+    BannerView bannerView;
     // Use this for initialization
     private void Awake()
     {
@@ -43,7 +44,19 @@ public class AdMobManager : MonoBehaviour
     {
         InGameManager.instance.Revival();
     }
-    
+
+    public void RequestBannerAd()
+    {
+        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        AdRequest adRequest = new AdRequest.Builder().AddTestDevice("33BE2250B43518CCDA7DE426D04EE232").Build();
+        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
+        bannerView.LoadAd(adRequest);
+    }
+    public void DestroyBannerAd()
+    {
+        bannerView.Destroy();
+        bannerView = null;
+    }
 
     public void RequestRewardBasedVideoAd()
     {
@@ -56,6 +69,10 @@ public class AdMobManager : MonoBehaviour
     public void ShowRewardBasedVideo()
     {
         StartCoroutine(ShowRewardBasedVideoAd());
+    }
+    public bool IsBannerOnScreen()
+    {
+        return bannerView == null ? false : true;
     }
 
     IEnumerator ShowRewardBasedVideoAd()
