@@ -1,11 +1,8 @@
-using System.IO;
-
 using UnityEditor;
 using UnityEngine;
 
 namespace GoogleMobileAds.Editor
 {
-
     [InitializeOnLoad]
     [CustomEditor(typeof(GoogleMobileAdsSettings))]
     public class GoogleMobileAdsSettingsEditor : UnityEditor.Editor
@@ -56,10 +53,11 @@ namespace GoogleMobileAds.Editor
             GoogleMobileAdsSettings.Instance.DelayAppMeasurementInit =
                     EditorGUILayout.Toggle(new GUIContent("Delay app measurement"),
                     GoogleMobileAdsSettings.Instance.DelayAppMeasurementInit);
-            if (GoogleMobileAdsSettings.Instance.DelayAppMeasurementInit) {
-                    EditorGUILayout.HelpBox(
-                            "Delays app measurement until you explicitly initialize the Mobile Ads SDK or load an ad.",
-                            MessageType.Info);
+            if (GoogleMobileAdsSettings.Instance.DelayAppMeasurementInit)
+            {
+                EditorGUILayout.HelpBox(
+                        "Delays app measurement until you explicitly initialize the Mobile Ads SDK or load an ad.",
+                        MessageType.Info);
             }
             EditorGUI.EndDisabledGroup();
 
@@ -71,7 +69,7 @@ namespace GoogleMobileAds.Editor
 
         private void OnSettingsChanged()
         {
-            EditorUtility.SetDirty((GoogleMobileAdsSettings) target);
+            EditorUtility.SetDirty((GoogleMobileAdsSettings)target);
             GoogleMobileAdsSettings.Instance.WriteSettingsToFile();
         }
     }

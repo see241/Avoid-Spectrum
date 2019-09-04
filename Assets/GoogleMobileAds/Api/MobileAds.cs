@@ -12,20 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 using GoogleMobileAds.Common;
+using System;
 
 namespace GoogleMobileAds.Api
 {
     public class MobileAds
     {
-        public static class Utils {
+        public static class Utils
+        {
             // Returns the device's scale.
-            public static float GetDeviceScale() {
+            public static float GetDeviceScale()
+            {
                 return client.GetDeviceScale();
             }
         }
+
         private static readonly IMobileAdsClient client = GetMobileAdsClient();
 
         public static void Initialize(string appId)
@@ -57,7 +59,7 @@ namespace GoogleMobileAds.Api
 
         private static IMobileAdsClient GetMobileAdsClient()
         {
-          return GoogleMobileAdsClientFactory.MobileAdsInstance();
+            return GoogleMobileAdsClientFactory.MobileAdsInstance();
         }
     }
 }

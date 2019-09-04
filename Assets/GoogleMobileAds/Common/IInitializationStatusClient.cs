@@ -12,14 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
 using GoogleMobileAds.Api;
+using System.Collections.Generic;
 
 namespace GoogleMobileAds.Common
 {
     internal interface IInitializationStatusClient
     {
         AdapterStatus getAdapterStatusForClassName(string className);
+
         Dictionary<string, AdapterStatus> getAdapterStatusMap();
     }
 }

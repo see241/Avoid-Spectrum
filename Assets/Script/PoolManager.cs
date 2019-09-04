@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour
@@ -57,9 +56,11 @@ public class PoolManager : MonoBehaviour
         list.Add(_go);
         listed.Remove(_go);
     }
+
     public void AllBulletStop()
     {
     }
+
     public void CleanPool()
     {
         while (listed.Count > 0)

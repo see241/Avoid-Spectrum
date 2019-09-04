@@ -14,13 +14,11 @@
 
 #if UNITY_ANDROID
 
-using UnityEngine;
-using System;
-using System.Collections.Generic;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Api.Mediation;
-using GoogleMobileAds.Common;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
@@ -53,7 +51,7 @@ namespace GoogleMobileAds.Android
         public const string ServerSideVerificationOptionsBuilderClassName =
             "com.google.android.gms.ads.rewarded.ServerSideVerificationOptions$Builder";
 
-        #endregion
+        #endregion Google Mobile Ads SDK class names
 
         #region Google Mobile Ads Unity Plugin class names
 
@@ -86,22 +84,22 @@ namespace GoogleMobileAds.Android
 
         public const string PluginUtilsClassName = "com.google.unity.ads.PluginUtils";
 
-        #endregion
+        #endregion Google Mobile Ads Unity Plugin class names
 
         #region Unity class names
 
         public const string UnityActivityClassName = "com.unity3d.player.UnityPlayer";
 
-        #endregion
+        #endregion Unity class names
 
         #region Android SDK class names
 
         public const string BundleClassName = "android.os.Bundle";
         public const string DateClassName = "java.util.Date";
 
-        #endregion
+        #endregion Android SDK class names
 
-        #endregion
+        #endregion Fully-qualified class names
 
         #region JavaObject creators
 
@@ -157,10 +155,12 @@ namespace GoogleMobileAds.Android
                         genderCode = new AndroidJavaClass(AdRequestClassName)
                                 .GetStatic<int>("GENDER_UNKNOWN");
                         break;
+
                     case Api.Gender.Male:
                         genderCode = new AndroidJavaClass(AdRequestClassName)
                                 .GetStatic<int>("GENDER_MALE");
                         break;
+
                     case Api.Gender.Female:
                         genderCode = new AndroidJavaClass(AdRequestClassName)
                                 .GetStatic<int>("GENDER_FEMALE");
@@ -234,7 +234,9 @@ namespace GoogleMobileAds.Android
 
             return serverSideVerificationOptionsBuilder.Call<AndroidJavaObject>("build");
         }
-        #endregion
+
+        #endregion JavaObject creators
     }
 }
+
 #endif

@@ -14,23 +14,25 @@
 
 #if UNITY_ANDROID
 
+using GoogleMobileAds.Api;
+using GoogleMobileAds.Common;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-using GoogleMobileAds.Api;
-using GoogleMobileAds.Common;
 
 namespace GoogleMobileAds.Android
 {
     public class AdLoaderClient : AndroidJavaProxy, IAdLoaderClient
     {
         private AndroidJavaObject adLoader;
+
         private Dictionary<string, Action<CustomNativeTemplateAd, string>> CustomNativeTemplateCallbacks
         {
             get; set;
         }
+
         public event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad;
+
         public event EventHandler<CustomNativeEventArgs> OnCustomNativeTemplateAdLoaded;
 
         public AdLoaderClient(AdLoader unityAdLoader) : base(Utils.UnityAdLoaderListenerClassName)
@@ -54,7 +56,8 @@ namespace GoogleMobileAds.Android
                         this.CustomNativeTemplateCallbacks.ContainsKey(templateId));
                 }
             }
-            if (supportsRequestImageAssetUrls) {
+            if (supportsRequestImageAssetUrls)
+            {
                 adLoader.Call("configureReturnUrlsForImageAssets");
             }
             adLoader.Call("create");
@@ -77,7 +80,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdFailedToLoad(string errorReason)
+        private void onAdFailedToLoad(string errorReason)
         {
             AdFailedToLoadEventArgs args = new AdFailedToLoadEventArgs()
             {

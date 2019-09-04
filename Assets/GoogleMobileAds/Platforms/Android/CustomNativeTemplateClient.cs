@@ -14,9 +14,8 @@
 
 #if UNITY_ANDROID
 
-using System.Collections.Generic;
-
 using GoogleMobileAds.Common;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GoogleMobileAds.Android

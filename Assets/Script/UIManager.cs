@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,17 +9,17 @@ public class UIManager : MonoBehaviour
     public GameObject dieMenu;
     public GameObject clearMenu;
     public GameObject pauseButton;
-    private bool swPause;
+    public bool swPause;
     public TextMesh text;
     public Button revivalButton;
     public Image revivalButtonImage;
-    
 
     // Use this for initialization
     private void Awake()
     {
         instance = this;
     }
+
     private void Start()
     {
         pauseMenu.SetActive(false);
@@ -52,7 +50,6 @@ public class UIManager : MonoBehaviour
             swPause = true;
         }
     }
-
     public void Restart()
     {
         Time.timeScale = 1;
@@ -67,12 +64,14 @@ public class UIManager : MonoBehaviour
         pauseButton.SetActive(true);
         Player.instance.isRevival = false;
     }
+
     public void Revival()
     {
         revivalButton.interactable = false;
         AdMobManager.instance.ShowRewardBasedVideo();
         //InGameManager.instance.Revival();
     }
+
     public void Clear()
     {
         clearMenu.SetActive(true);
@@ -80,7 +79,7 @@ public class UIManager : MonoBehaviour
         pauseButton.SetActive(false);
         SoundManager.instance.SetUIInfo();
     }
-    
+
     public void BackHome()
     {
         Time.timeScale = 1;
@@ -111,7 +110,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
         for (int i = 0; i < 3; i++)
         {
-            TextMesh _text = Instantiate(text,transform);
+            TextMesh _text = Instantiate(text, transform);
             _text.text = (3 - i).ToString();
             yield return new WaitForSeconds(1f);
             Destroy(_text.gameObject);
@@ -120,15 +119,17 @@ public class UIManager : MonoBehaviour
         InGameManager.instance.isPause = false;
         SoundManager.instance.SoundResume();
     }
+
     public void StartRevivalTimer()
     {
         StartCoroutine(RevivalTimer());
     }
-    IEnumerator RevivalTimer()
+
+    private IEnumerator RevivalTimer()
     {
         revivalButton.interactable = true;
         revivalButtonImage.fillAmount = 1;
-        while (revivalButtonImage.fillAmount>0)
+        while (revivalButtonImage.fillAmount > 0)
         {
             revivalButtonImage.fillAmount -= (1 / 5.0f) * Time.deltaTime;
             yield return null;

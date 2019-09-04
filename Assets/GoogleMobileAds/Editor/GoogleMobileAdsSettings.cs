@@ -1,14 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-
 using UnityEditor;
 using UnityEngine;
 
 namespace GoogleMobileAds.Editor
 {
-
     internal class GoogleMobileAdsSettings : ScriptableObject
     {
         private const string MobileAdsSettingsDir = "Assets/GoogleMobileAds";
@@ -111,7 +105,7 @@ namespace GoogleMobileAds.Editor
                         AssetDatabase.CreateFolder(MobileAdsSettingsDir, "Resources");
                     }
 
-                    instance = (GoogleMobileAdsSettings) AssetDatabase.LoadAssetAtPath(
+                    instance = (GoogleMobileAdsSettings)AssetDatabase.LoadAssetAtPath(
                         MobileAdsSettingsFile, typeof(GoogleMobileAdsSettings));
 
                     if (instance == null)

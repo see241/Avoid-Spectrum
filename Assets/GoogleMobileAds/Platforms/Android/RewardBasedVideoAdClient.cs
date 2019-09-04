@@ -14,11 +14,10 @@
 
 #if UNITY_ANDROID
 
-using System;
-using UnityEngine;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using System;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
@@ -27,12 +26,19 @@ namespace GoogleMobileAds.Android
         private AndroidJavaObject androidRewardBasedVideo;
 
         public event EventHandler<EventArgs> OnAdLoaded = delegate { };
+
         public event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad = delegate { };
+
         public event EventHandler<EventArgs> OnAdOpening = delegate { };
+
         public event EventHandler<EventArgs> OnAdStarted = delegate { };
+
         public event EventHandler<EventArgs> OnAdClosed = delegate { };
+
         public event EventHandler<Reward> OnAdRewarded = delegate { };
+
         public event EventHandler<EventArgs> OnAdLeavingApplication = delegate { };
+
         public event EventHandler<EventArgs> OnAdCompleted = delegate { };
 
         public RewardBasedVideoAdClient()
@@ -83,11 +89,11 @@ namespace GoogleMobileAds.Android
             return this.androidRewardBasedVideo.Call<string>("getMediationAdapterClassName");
         }
 
-        #endregion
+        #endregion IRewardBasedVideoClient implementation
 
         #region Callbacks from UnityRewardBasedVideoAdListener.
 
-        void onAdLoaded()
+        private void onAdLoaded()
         {
             if (this.OnAdLoaded != null)
             {
@@ -95,7 +101,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdFailedToLoad(string errorReason)
+        private void onAdFailedToLoad(string errorReason)
         {
             if (this.OnAdFailedToLoad != null)
             {
@@ -107,7 +113,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdOpened()
+        private void onAdOpened()
         {
             if (this.OnAdOpening != null)
             {
@@ -115,7 +121,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdStarted()
+        private void onAdStarted()
         {
             if (this.OnAdStarted != null)
             {
@@ -123,7 +129,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdClosed()
+        private void onAdClosed()
         {
             if (this.OnAdClosed != null)
             {
@@ -131,7 +137,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdRewarded(string type, float amount)
+        private void onAdRewarded(string type, float amount)
         {
             if (this.OnAdRewarded != null)
             {
@@ -144,7 +150,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdLeftApplication()
+        private void onAdLeftApplication()
         {
             if (this.OnAdLeavingApplication != null)
             {
@@ -152,7 +158,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onAdCompleted()
+        private void onAdCompleted()
         {
             if (this.OnAdCompleted != null)
             {
@@ -160,7 +166,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        #endregion
+        #endregion Callbacks from UnityRewardBasedVideoAdListener.
     }
 }
 

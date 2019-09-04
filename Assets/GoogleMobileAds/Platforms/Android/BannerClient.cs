@@ -14,10 +14,9 @@
 
 #if UNITY_ANDROID
 
-using System;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using System;
 using UnityEngine;
 
 namespace GoogleMobileAds.Android
@@ -115,7 +114,7 @@ namespace GoogleMobileAds.Android
             return this.bannerView.Call<string>("getMediationAdapterClassName");
         }
 
-#region Callbacks from UnityBannerAdListener.
+        #region Callbacks from UnityBannerAdListener.
 
         public void onAdLoaded()
         {
@@ -161,7 +160,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-#endregion
+        #endregion Callbacks from UnityBannerAdListener.
     }
 }
 

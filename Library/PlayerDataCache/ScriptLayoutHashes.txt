@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-/Users/yuseungji/Desktop/Build.apk
+C:/Users/Administrator/Desktop/Projects/Void-Spectrum/AdmobAttach_Test.apk
 SceneListBegin?
 Assets/Scenes/Menu.unity
 SceneListEnd?
@@ -124,7 +124,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 7e3be3a5c935dfbda5381c7d9a74100c Assembly-CSharp.dll:.MenuControll
-e462f6ceb9d4a5bf7f2280060bddc854 Assembly-CSharp.dll:.Player
+f66e3736c23efc823284419f045b9499 Assembly-CSharp.dll:.Player
 5629cad21b928ada399145f5573722f7 Assembly-CSharp.dll:.InGameManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -162,4 +162,4 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 3e6672d5b78ad579220ea5d8c7d50007 Assembly-CSharp.dll:.PanelSort
 7c8a9669b49812b56cdea4f99f981274 Assembly-CSharp.dll:.SoundManager
-8be58aa7aa6343c7ba7b873043f4621a Assembly-CSharp.dll:.UIManager
+274c327c3b91bb0b88e85c9daf79f3fb Assembly-CSharp.dll:.UIManager

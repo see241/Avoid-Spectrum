@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,19 +15,21 @@ public enum ControlType
 
 public enum GameState
 {
-    Main, Menu, InGame
+    Main, Menu, InGame,Option
 }
 
 public class InGameManager : MonoBehaviour
 {
-    
     public static InGameManager instance;
     public ParticleSystem dieEffect;
     public GameObject number;
     public List<GameObject> uiList;
     public List<GameObject> objectList;
     public GameObject dieMenu;
+    public List<UnityEngine.UI.Button> diffSetButtons;
+    public List<UnityEngine.UI.Text> diffSetTexts;
     public UnityEngine.UI.Image panel;
+    float[] difficultys = new float[3] { 1.25f, 1f, 0.85f};
 
     public bool isPause;
     private bool stopFlag;
@@ -35,11 +38,29 @@ public class InGameManager : MonoBehaviour
     public bool isMusicStarted;
 
     public string curSongName;
+    Difficulty dif;
+    public Difficulty difficulty
+    {
+        get { return dif; }
+        set
+        {
+            dif = value;
+            for(int i = 0; i < 3; i++)
+            {
+                diffSetButtons[i].interactable = true;
+                diffSetTexts[i].color = new Color(1, 1, 1, 0.5f);
+            }
 
-    public Difficulty difficulty;
+            diffSetButtons[(int)dif].interactable = false;
+            diffSetTexts[(int)dif].color = new Color(1, 1, 1, 1);
+            MenuManager.instance.SetDifficultyScore();
+        }
+    }
     public ControlType controlType;
     private GameState gs;
     private int gold;
+    [SerializeField]
+    public UnityEngine.UI.Slider slider;
     public int Gold
     {
         get { return gold; }
@@ -49,6 +70,7 @@ public class InGameManager : MonoBehaviour
             PlayerPrefs.SetInt("Gold", gold);
         }
     }
+
     public GameState state
     {
         get { return gs; }
@@ -92,6 +114,7 @@ public class InGameManager : MonoBehaviour
         }
     }
 
+
     private void Awake()
     {
         if (instance != null)
@@ -118,19 +141,35 @@ public class InGameManager : MonoBehaviour
         Gold = PlayerPrefs.GetInt("Gold", 0);
         state = GameState.Main;
         isPause = false;
+        slider.onValueChanged.AddListener(delegate { MoveSensitiveAdapt(); });
+        difficulty = Difficulty.Normal;
     }
-    public void Revival()
+
+    void MoveSensitiveAdapt()
+    {
+        Player.instance.SetMoveSensitive(0.25f + slider.value * 0.75f);
+    }
+    public float GetDifficulty()
+    {
+        return difficultys[(int)difficulty];
+    }
+    public void RevivalReady()
+    {
+        Invoke("Revival", 0.3f);
+    }
+    void Revival()
     {
         Player.instance.gameObject.SetActive(true);
         dieMenu.SetActive(false);
         pauseButton.SetActive(true);
+        Player.instance.RevivalInit();
         StartCoroutine(PlayerInvisible());
     }
 
     public void PlayerDie(GameObject player)
     {
         ParticleSystem ptc = Instantiate(dieEffect);
-        ptc.transform.position = player.transform.position;
+        ptc.transform.position = player.transform.position;                               
         Destroy(ptc, ptc.duration + ptc.startLifetime);
         SoundManager.instance.SetUIInfo();
         dieMenu.SetActive(true);
@@ -148,7 +187,8 @@ public class InGameManager : MonoBehaviour
         controlType = type;
         PlayerPrefs.SetInt("ControlType", (int)controlType);
     }
-    IEnumerator PlayerInvisible()
+
+    private IEnumerator PlayerInvisible()
     {
         Player.instance.GetComponent<CircleCollider2D>().enabled = false;
         panel.gameObject.SetActive(true);
@@ -162,5 +202,13 @@ public class InGameManager : MonoBehaviour
         panel.gameObject.SetActive(false);
         SoundManager.instance.curSong.volume = 1;
         Player.instance.GetComponent<CircleCollider2D>().enabled = true;
+    }
+    IEnumerator ReadyPlay()
+    {
+        while (Input.touchCount <= 0)
+        {
+            yield return null;
+        }
+        UIManager.instance.Pause();
     }
 }

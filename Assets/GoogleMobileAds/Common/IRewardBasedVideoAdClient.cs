@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 using GoogleMobileAds.Api;
+using System;
 
 namespace GoogleMobileAds.Common
 {
@@ -22,18 +21,25 @@ namespace GoogleMobileAds.Common
     {
         // Ad event fired when the reward based video ad has been received.
         event EventHandler<EventArgs> OnAdLoaded;
+
         // Ad event fired when the reward based video ad has failed to load.
         event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad;
+
         // Ad event fired when the reward based video ad is opened.
         event EventHandler<EventArgs> OnAdOpening;
+
         // Ad event fired when the reward based video ad has started playing.
         event EventHandler<EventArgs> OnAdStarted;
+
         // Ad event fired when the reward based video ad has rewarded the user.
         event EventHandler<Reward> OnAdRewarded;
+
         // Ad event fired when the reward based video ad is closed.
         event EventHandler<EventArgs> OnAdClosed;
+
         // Ad event fired when the reward based video ad is leaving the application.
         event EventHandler<EventArgs> OnAdLeavingApplication;
+
         // Ad event fired when the reward based video ad completes playing.
         event EventHandler<EventArgs> OnAdCompleted;
 

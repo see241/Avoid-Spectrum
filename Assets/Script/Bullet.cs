@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public Vector2 dir;
 
     public float speed;
-    Transform tf;
+    private Transform tf;
     private float _speed;
-    const float powedDistance = 20.25f;
+    private const float powedDistance = 20.25f;
+
     // Use this for initialization
     private void Start()
     {
-        tf =transform;
+        tf = transform;
     }
 
     // Update is called once per frame
@@ -21,9 +20,8 @@ public class Bullet : MonoBehaviour
     {
         if (!InGameManager.instance.isPause)
         {
-                speed = CircleSpectrum_V3.instance.applyBulletSpeed + 0.1f;
-                tf.Translate(dir * Time.deltaTime * speed);
-            
+            speed = CircleSpectrum_V3.instance.applyBulletSpeed + 0.1f;
+            tf.Translate(dir * Time.deltaTime * speed);
         }
         if (GetDistance(tf.position, Vector2.zero) > powedDistance)
         {
@@ -38,6 +36,6 @@ public class Bullet : MonoBehaviour
 
     private float GetDistance(Vector2 a, Vector2 b)
     {
-        return (a.x - b.x)* (a.x - b.x) + (a.y - b.y)* (a.y - b.y);
+        return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
     }
 }

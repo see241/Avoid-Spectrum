@@ -14,11 +14,10 @@
 
 #if UNITY_ANDROID
 
-using System;
-using UnityEngine;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using System;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
@@ -84,11 +83,11 @@ namespace GoogleMobileAds.Android
             return this.androidRewardedAd.Call<string>("getMediationAdapterClassName");
         }
 
-        #endregion
+        #endregion IRewardedClient implementation
 
         #region Callbacks from UnityRewardBasedVideoAdListener.
 
-        void onRewardedAdLoaded()
+        private void onRewardedAdLoaded()
         {
             if (this.OnAdLoaded != null)
             {
@@ -96,7 +95,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onRewardedAdFailedToLoad(string errorReason)
+        private void onRewardedAdFailedToLoad(string errorReason)
         {
             if (this.OnAdFailedToLoad != null)
             {
@@ -108,7 +107,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onRewardedAdFailedToShow(string errorReason)
+        private void onRewardedAdFailedToShow(string errorReason)
         {
             if (this.OnAdFailedToShow != null)
             {
@@ -120,7 +119,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onRewardedAdOpened()
+        private void onRewardedAdOpened()
         {
             if (this.OnAdOpening != null)
             {
@@ -128,8 +127,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-
-        void onRewardedAdClosed()
+        private void onRewardedAdClosed()
         {
             if (this.OnAdClosed != null)
             {
@@ -137,7 +135,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        void onUserEarnedReward(string type, float amount)
+        private void onUserEarnedReward(string type, float amount)
         {
             if (this.OnUserEarnedReward != null)
             {
@@ -150,7 +148,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        #endregion
+        #endregion Callbacks from UnityRewardBasedVideoAdListener.
     }
 }
 

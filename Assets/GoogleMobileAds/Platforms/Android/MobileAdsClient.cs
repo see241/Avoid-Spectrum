@@ -14,11 +14,10 @@
 
 #if UNITY_ANDROID
 
-using System;
-using UnityEngine;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using System;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
@@ -28,7 +27,9 @@ namespace GoogleMobileAds.Android
 
         private Action<InitializationStatus> initCompleteAction;
 
-        private MobileAdsClient() : base(Utils.OnInitializationCompleteListenerClassName) { }
+        private MobileAdsClient() : base(Utils.OnInitializationCompleteListenerClassName)
+        {
+        }
 
         public static MobileAdsClient Instance
         {
@@ -96,8 +97,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        #endregion
-
+        #endregion Callbacks from OnInitializationCompleteListener.
     }
 }
 

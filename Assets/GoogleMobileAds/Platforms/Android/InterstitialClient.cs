@@ -14,10 +14,9 @@
 
 #if UNITY_ANDROID
 
-using System;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using System;
 using UnityEngine;
 
 namespace GoogleMobileAds.Android
@@ -83,7 +82,7 @@ namespace GoogleMobileAds.Android
             return this.interstitial.Call<string>("getMediationAdapterClassName");
         }
 
-        #endregion
+        #endregion IGoogleMobileAdsInterstitialClient implementation
 
         #region Callbacks from UnityInterstitialAdListener.
 
@@ -131,7 +130,7 @@ namespace GoogleMobileAds.Android
             }
         }
 
-        #endregion
+        #endregion Callbacks from UnityInterstitialAdListener.
     }
 }
 

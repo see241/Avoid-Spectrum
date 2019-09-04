@@ -6,16 +6,20 @@ using System.Linq;
 using System.Xml.Linq;
 
 #if UNITY_2018_1_OR_NEWER
+
 using UnityEditor.Build.Reporting;
+
 #else
 using UnityEditor;
 #endif
+
 using UnityEditor.Build;
 using UnityEngine;
 
 using GoogleMobileAds.Editor;
 
 #if UNITY_2018_1_OR_NEWER
+
 public class ManifestProcessor : IPreprocessBuildWithReport
 #else
 public class ManifestProcessor : IPreprocessBuild
@@ -23,7 +27,7 @@ public class ManifestProcessor : IPreprocessBuild
 {
     private const string META_AD_MANAGER_APP = "com.google.android.gms.ads.AD_MANAGER_APP";
 
-    private const string META_APPLICATION_ID  = "com.google.android.gms.ads.APPLICATION_ID";
+    private const string META_APPLICATION_ID = "com.google.android.gms.ads.APPLICATION_ID";
 
     private const string META_DELAY_APP_MEASUREMENT_INIT =
             "com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT";
@@ -33,6 +37,7 @@ public class ManifestProcessor : IPreprocessBuild
     public int callbackOrder { get { return 0; } }
 
 #if UNITY_2018_1_OR_NEWER
+
     public void OnPreprocessBuild(BuildReport report)
 #else
     public void OnPreprocessBuild(BuildTarget target, string path)
@@ -46,9 +51,9 @@ public class ManifestProcessor : IPreprocessBuild
         {
             manifest = XDocument.Load(manifestPath);
         }
-        #pragma warning disable 0168
+#pragma warning disable 0168
         catch (IOException e)
-        #pragma warning restore 0168
+#pragma warning restore 0168
         {
             Debug.LogError(
                     "[GoogleMobileAds] AndroidManifest.xml is missing. Try re-importing the plugin.");
@@ -72,7 +77,7 @@ public class ManifestProcessor : IPreprocessBuild
         }
 
         IEnumerable<XElement> metas = elemApplication.Descendants()
-                .Where( elem => elem.Name.LocalName.Equals("meta-data"));
+                .Where(elem => elem.Name.LocalName.Equals("meta-data"));
 
         XElement elemAdManagerEnabled = GetMetaElement(metas, META_AD_MANAGER_APP);
         if (GoogleMobileAdsSettings.Instance.IsAdManagerEnabled)

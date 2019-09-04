@@ -14,11 +14,10 @@
 
 #if UNITY_ANDROID
 
-using UnityEngine;
-
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
@@ -57,7 +56,7 @@ namespace GoogleMobileAds.Android
         {
             Dictionary<string, AdapterStatus> map = new Dictionary<string, AdapterStatus>();
             string[] keys = getKeys();
-            foreach(string key in keys)
+            foreach (string key in keys)
             {
                 map.Add(key, getAdapterStatusForClassName(key));
             }

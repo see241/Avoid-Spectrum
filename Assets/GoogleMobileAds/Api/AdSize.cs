@@ -14,7 +14,6 @@
 
 namespace GoogleMobileAds.Api
 {
-
     public class AdSize
     {
         private bool isSmartBanner;
@@ -39,6 +38,7 @@ namespace GoogleMobileAds.Api
         {
             this.isSmartBanner = isSmartBanner;
         }
+
         public int Width
         {
             get

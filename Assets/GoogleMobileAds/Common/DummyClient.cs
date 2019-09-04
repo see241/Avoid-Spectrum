@@ -12,10 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using GoogleMobileAds.Api;
 using System;
 using System.Reflection;
-
-using GoogleMobileAds.Api;
 using UnityEngine;
 
 namespace GoogleMobileAds.Common
@@ -214,6 +213,5 @@ namespace GoogleMobileAds.Common
             Debug.Log("Dummy " + MethodBase.GetCurrentMethod().Name);
             return null;
         }
-
     }
 }

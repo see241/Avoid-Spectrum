@@ -75,7 +75,7 @@ public class CircleSpectrum_V3 : MonoBehaviour
         for (int i = 0; i < spectrumCnt; i++)
         {
             sens += SpectrumData[i];
-            float targetPos = SpectrumData[i] * sensitive*samplingrateCover;
+            float targetPos = SpectrumData[i] * sensitive * samplingrateCover;
 
             Vector3 targetVec = targetGrids[i].transform.position + targetGrids[i].transform.up * minLen + targetGrids[i].transform.up * targetPos;
             spectrumPos[i].transform.position = Vector3.MoveTowards(spectrumPos[i].transform.position, targetVec, 0.07f);
@@ -114,7 +114,10 @@ public class CircleSpectrum_V3 : MonoBehaviour
         applyBulletSpeed = sens / 2 * bulletSpeed;
         sens = 0;
     }
-
+    public void SetDifficult(float f)
+    {
+        diff=0.15f*f;
+    }
     private IEnumerator iStartCooltime(int t)
     {
         coolTime[t] = true;

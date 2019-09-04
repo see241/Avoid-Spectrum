@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,34 +17,33 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource curSong;
     private IEnumerator iStartGame;
+    IEnumerator iClearChecker;
     private Coroutine co;
 
     public bool isClear;
+
+    float songTIme;
 
     private void Awake()
     {
         instance = this;
         iStartGame = StartGame();
+        iClearChecker = ClearChacker();
     }
 
     // Use this for initialization
     private void Start()
     {
-        CircleSpectrum_V3.instance.samplingrateCover = 44100f/AudioSettings.outputSampleRate;
+        CircleSpectrum_V3.instance.samplingrateCover = 44100f / AudioSettings.outputSampleRate;
     }
 
     // Update is called once per frame
-    private void Update()
-    {
-        if (InGameManager.instance.state == GameState.InGame && !curSong.isPlaying && !InGameManager.instance.isPause && InGameManager.instance.isMusicStarted && !isClear)
-        {
-            isClear = true;
-        }
-    }
 
     public void InitScene()
     {
         StartCoroutine(iStartGame);
+        isClear = false;
+       
     }
 
     public void CloseScene()
@@ -53,6 +51,9 @@ public class SoundManager : MonoBehaviour
         curSong.volume = 1;
         StopCoroutine(iStartGame);
         iStartGame = StartGame();
+        StopCoroutine(iClearChecker);
+        iClearChecker = ClearChacker();
+       
         AllSoundStop();
         InGameManager.instance.isMusicStarted = false;
     }
@@ -63,21 +64,21 @@ public class SoundManager : MonoBehaviour
         _progressBar.value = progressBar.value;
         score.text = ((int)(_progressBar.value * 100)) + "%";
         curSongScore = (int)(_progressBar.value * 100);
-        if (PlayerPrefs.HasKey(InGameManager.instance.curSongName + "Score"))
+        if (PlayerPrefs.HasKey(InGameManager.instance.curSongName+InGameManager.instance.difficulty.ToString() + "Score"))
         {
             if (isClear)
             {
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", 100);
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", 100);
             }
-            if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + "Score") < curSongScore)
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
+            if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score") < curSongScore)
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", curSongScore);
         }
         else
         {
             if (isClear)
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", 100);
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", 100);
             if (!isClear)
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + "Score", curSongScore);
+                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", curSongScore);
         }
         PlayerPrefs.Save();
     }
@@ -90,9 +91,11 @@ public class SoundManager : MonoBehaviour
         }
         curSong = transform.Find(a).GetComponent<AudioSource>();
         curSong.Play();
+        CircleSpectrum_V3.instance.SetDifficult(InGameManager.instance.GetDifficulty());
         _title.text = a;
         title.text = a;
         title_.text = a;
+        songTIme = 0;
     }
 
     public void AllSoundStop()
@@ -127,7 +130,7 @@ public class SoundManager : MonoBehaviour
         Player.instance.gameObject.SetActive(true);
         for (int i = 0; i < 3; i++)
         {
-            TextMesh _text = Instantiate(text,GameObject.Find("InGameObject").transform);
+            TextMesh _text = Instantiate(text, GameObject.Find("InGameObject").transform);
             _text.text = (3 - i).ToString();
             Destroy(_text.gameObject, 1);
             yield return new WaitForSeconds(1f);
@@ -135,5 +138,24 @@ public class SoundManager : MonoBehaviour
         SoundChage(InGameManager.instance.curSongName);
         curSong.volume = 1;
         InGameManager.instance.isMusicStarted = true;
+        StartCoroutine(iClearChecker);
+        
+    }
+    IEnumerator ClearChacker()
+    {
+        while (true)
+        {
+            if (InGameManager.instance.isPause==false)
+            {
+                songTIme += Time.deltaTime;
+                if (songTIme > curSong.clip.length)
+                {
+                    break;
+                }
+                Debug.Log(songTIme + " : " + curSong.clip.length);
+            }
+            yield return null;
+        }
+        isClear = true;
     }
 }

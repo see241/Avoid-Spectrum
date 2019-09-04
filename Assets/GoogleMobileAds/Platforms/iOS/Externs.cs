@@ -22,7 +22,7 @@ namespace GoogleMobileAds.iOS
     // Externs used by the iOS component.
     internal class Externs
     {
-        #region Common externs
+#region Common externs
 
         [DllImport("__Internal")]
         internal static extern void GADUInitialize(string key);
@@ -45,7 +45,6 @@ namespace GoogleMobileAds.iOS
 
         [DllImport("__Internal")]
         internal static extern int GADUGetInitNumberOfAdapterClasses(IntPtr status);
-
 
         [DllImport("__Internal")]
         internal static extern void GADUSetApplicationVolume(float volume);
@@ -102,9 +101,9 @@ namespace GoogleMobileAds.iOS
         [DllImport("__Internal")]
         internal static extern void GADURelease(IntPtr obj);
 
-        #endregion
+#endregion Common externs
 
-        #region Banner externs
+#region Banner externs
 
         [DllImport("__Internal")]
         internal static extern IntPtr GADUCreateBannerView(
@@ -162,9 +161,9 @@ namespace GoogleMobileAds.iOS
         [DllImport("__Internal")]
         internal static extern IntPtr GADUMediationAdapterClassNameForBannerView(IntPtr bannerView);
 
-        #endregion
+#endregion Banner externs
 
-        #region Interstitial externs
+#region Interstitial externs
 
         [DllImport("__Internal")]
         internal static extern IntPtr GADUCreateInterstitial(
@@ -193,9 +192,9 @@ namespace GoogleMobileAds.iOS
         [DllImport("__Internal")]
         internal static extern IntPtr GADUMediationAdapterClassNameForInterstitial(IntPtr interstitial);
 
-        #endregion
+#endregion Interstitial externs
 
-        #region Reward based video externs
+#region Reward based video externs
 
         [DllImport("__Internal")]
         internal static extern IntPtr GADUCreateRewardBasedVideoAd(IntPtr rewardBasedVideo);
@@ -231,9 +230,9 @@ namespace GoogleMobileAds.iOS
         [DllImport("__Internal")]
         internal static extern IntPtr GADUMediationAdapterClassNameForRewardedVideo(IntPtr rewardedVideo);
 
-        #endregion
+#endregion Reward based video externs
 
-        #region RewardedAd externs
+#region RewardedAd externs
 
         [DllImport("__Internal")]
         internal static extern IntPtr GADUCreateRewardedAd(IntPtr rewardedAd, string adUnitId);
@@ -276,9 +275,9 @@ namespace GoogleMobileAds.iOS
         [DllImport("__Internal")]
         internal static extern IntPtr GADUMediationAdapterClassNameForRewardedAd(IntPtr rewardedVideo);
 
-        #endregion
+#endregion RewardedAd externs
 
-        #region AdLoader externs
+#region AdLoader externs
 
         [DllImport("__Internal")]
         internal static extern IntPtr GADUCreateAdLoader(
@@ -298,9 +297,9 @@ namespace GoogleMobileAds.iOS
             AdLoaderClient.GADUAdLoaderDidReceiveNativeCustomTemplateAdCallback adReceivedCallback,
             AdLoaderClient.GADUAdLoaderDidFailToReceiveAdWithErrorCallback adFailedCallback);
 
-        #endregion
+#endregion AdLoader externs
 
-        #region NativeCustomTemplateAd externs
+#region NativeCustomTemplateAd externs
 
         [DllImport("__Internal")]
         internal static extern string GADUNativeCustomTemplateAdTemplateID(
@@ -340,7 +339,7 @@ namespace GoogleMobileAds.iOS
             CustomNativeTemplateClient.GADUNativeCustomTemplateDidReceiveClick
                     adClickedCallback);
 
-        #endregion
+#endregion NativeCustomTemplateAd externs
     }
 }
 

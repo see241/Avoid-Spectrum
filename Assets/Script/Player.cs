@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
     public static Player instance;
     public float speed;
     public bool isRevival;
+
     private delegate void del();
 
     private del Move;
@@ -20,15 +19,17 @@ public class Player : MonoBehaviour
 
     private Vector2 deltaPos;
 
-    CircleCollider2D collider2D;
+    private CircleCollider2D collider2D;
 
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
 
     public float skilCoolTime;
-    bool isCooltime;
-    bool isMoving;
+    private bool isCooltime;
+    private bool isMoving;
     public ParticleSystem skilEffct;
-    TrailRenderer trail;
+    private TrailRenderer trail;
+    [SerializeField]
+    float moveSensitive;
     private void Awake()
     {
         instance = this;
@@ -44,13 +45,16 @@ public class Player : MonoBehaviour
             Move = MoveToJoyStick;
         else
             Move = MoveToTouch;
+    }public void SetMoveSensitive(float v)
+    {
+        moveSensitive = v;
     }
-
     // Update is called once per frame
     private void Update()
     {
         Move();
     }
+
     public void Init()
     {
         gameObject.SetActive(true);
@@ -59,6 +63,10 @@ public class Player : MonoBehaviour
         isCooltime = false;
         skilCoolBar.gameObject.SetActive(false);
         spriteRenderer.color = new Color32(47, 252, 253, 255);
+    }
+    public void RevivalInit()
+    {
+        lastPos = transform.position;
     }
     private void MoveToKeyboard()
     {
@@ -133,7 +141,7 @@ public class Player : MonoBehaviour
             {
                 if (!InGameManager.instance.isPause)
                 {
-                    transform.position = lastPos + (Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos;
+                    transform.position = lastPos +( (Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos)*moveSensitive  ;
                     if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
                     {
                         transform.position = transform.position.normalized * 4.24f;
@@ -154,11 +162,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        lastPos = transform.position;
+        lastPos = Vector2.zero ;
         InGameManager.instance.PlayerDie(gameObject);
         gameObject.SetActive(false);
     }
-    IEnumerator Skill(Vector2 dPos)
+
+    private IEnumerator Skill(Vector2 dPos)
     {
         Color startColor = spriteRenderer.color;
         trail.enabled = true;
@@ -181,13 +190,14 @@ public class Player : MonoBehaviour
         skilCoolBar.gameObject.SetActive(false);
         isCooltime = false;
     }
-    public void _ColorChange(Color c,float t)
-    {
-        StartCoroutine(ColorChange(c,t));
-    }
-    IEnumerator ColorChange(Color c, float t)
-    {
 
+    public void _ColorChange(Color c, float t)
+    {
+        StartCoroutine(ColorChange(c, t));
+    }
+
+    private IEnumerator ColorChange(Color c, float t)
+    {
         skilCoolBar.gameObject.SetActive(true);
         Color colorForTime = (c - spriteRenderer.color) / t;
         float startTime = Time.time;
@@ -199,11 +209,12 @@ public class Player : MonoBehaviour
                 countTime += Time.deltaTime;
                 spriteRenderer.color += colorForTime * Time.deltaTime;
             }
-            else{
-                countTime += Time.deltaTime/2;
-                spriteRenderer.color += colorForTime * Time.deltaTime/2;
+            else
+            {
+                countTime += Time.deltaTime / 2;
+                spriteRenderer.color += colorForTime * Time.deltaTime / 2;
             }
-            
+
             skilCoolBar.fillAmount = spriteRenderer.color.a;
             yield return null;
         }

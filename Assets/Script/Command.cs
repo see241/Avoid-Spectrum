@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Command : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+public class Command : MonoBehaviour
+{
+    // Use this for initialization
+    private void Start()
+    {
+    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
     }
 }
