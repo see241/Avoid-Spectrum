@@ -45,9 +45,15 @@ public class Player : MonoBehaviour
             Move = MoveToJoyStick;
         else
             Move = MoveToTouch;
-    }public void SetMoveSensitive(float v)
+    }
+    public void SetMoveSensitive(float v)
     {
         moveSensitive = v;
+        PlayerPrefs.SetFloat("MoveSensitive", moveSensitive);
+    }
+    public float GetMoveSensitive()
+    {
+        return moveSensitive;
     }
     // Update is called once per frame
     private void Update()
@@ -62,7 +68,6 @@ public class Player : MonoBehaviour
         trail.enabled = false;
         isCooltime = false;
         skilCoolBar.gameObject.SetActive(false);
-        spriteRenderer.color = new Color32(47, 252, 253, 255);
     }
     public void RevivalInit()
     {
@@ -190,7 +195,10 @@ public class Player : MonoBehaviour
         skilCoolBar.gameObject.SetActive(false);
         isCooltime = false;
     }
-
+    public void SetPlayerColor(Color color)
+    {
+        GetComponent<SpriteRenderer>().color = color;
+    }
     public void _ColorChange(Color c, float t)
     {
         StartCoroutine(ColorChange(c, t));

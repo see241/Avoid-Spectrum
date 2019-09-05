@@ -117,9 +117,14 @@
      <Compile Include="Assets\Script\MenuManager.cs" />
      <Compile Include="Assets\Script\PanelSort.cs" />
      <Compile Include="Assets\Script\Player.cs" />
+     <Compile Include="Assets\Script\PlayerPrefabInitManager.cs" />
+     <Compile Include="Assets\Script\PlayerPrefabsIniter.cs" />
      <Compile Include="Assets\Script\PoolManager.cs" />
      <Compile Include="Assets\Script\Selector.cs" />
+     <Compile Include="Assets\Script\ShopItem.cs" />
+     <Compile Include="Assets\Script\ShopManager.cs" />
      <Compile Include="Assets\Script\SoundManager.cs" />
+     <Compile Include="Assets\Script\TestPlayer.cs" />
      <Compile Include="Assets\Script\UIManager.cs" />
      <Compile Include="Assets\Script\ZigZagSpectrum.cs" />
  <Reference Include="UnityEditor.StandardEvents">

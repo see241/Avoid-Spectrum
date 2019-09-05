@@ -3,11 +3,15 @@ using System.Collections;
 using UnityEngine;
 using System;
 
+public enum RewardType
+{
+    Revival,Coin
+}
 public class AdMobManager : MonoBehaviour
 {
     public static AdMobManager instance;
     private RewardBasedVideoAd rewardBasedVideoAd;
-    
+    RewardType requestRewardType;
     private BannerView bannerView;
 
     // Use this for initialization
@@ -33,7 +37,7 @@ public class AdMobManager : MonoBehaviour
         MobileAds.Initialize(appId);
 
         rewardBasedVideoAd = RewardBasedVideoAd.Instance;
-        rewardBasedVideoAd.OnAdRewarded += PlayerRevival;
+        rewardBasedVideoAd.OnAdRewarded += RewardBasedVideoAd_OnAdRewarded;
         rewardBasedVideoAd.OnAdClosed += RewardBasedVideoAd_OnAdClosed;
         RequestRewardBasedVideoAd();
     }
@@ -44,9 +48,16 @@ public class AdMobManager : MonoBehaviour
         RequestRewardBasedVideoAd();
     }
 
-    private void PlayerRevival(object sender, Reward e)
+    private void RewardBasedVideoAd_OnAdRewarded(object sender, Reward e)
     {
-            InGameManager.instance.RevivalReady();
+        switch (requestRewardType) {
+            case RewardType.Revival:
+                InGameManager.instance.RevivalReady();
+                break;
+            case RewardType.Coin:
+                InGameManager.instance.AdGold();
+                break;
+        }
     }
 
     public void RequestBannerAd()
@@ -76,8 +87,9 @@ public class AdMobManager : MonoBehaviour
         Debug.Log("RewardBasedVideoAd Load End");
     }
 
-    public void ShowRewardBasedVideo()
+    public void ShowRewardBasedVideo(RewardType ad)
     {
+        requestRewardType = ad;
         StartCoroutine(ShowRewardBasedVideoAd());
     }
 

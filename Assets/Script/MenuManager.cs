@@ -27,10 +27,8 @@ public class MenuManager : MonoBehaviour
                 panels[idx - 1].GetComponent<PanelSort>().index = -1;
                 panels[idx - 1].SetActive(true);
                 left.interactable = true;
-                if (PlayerPrefs.HasKey(panels[idx - 1].name + "Score"))
-                {
-                    panels[idx - 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx - 1].name + InGameManager.instance.difficulty.ToString() + "Score") + "%";
-                }
+                    panels[idx - 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx - 1].name + InGameManager.instance.difficulty.ToString() + "Score",0) + "%";
+                
             }
             else
             {
@@ -39,26 +37,24 @@ public class MenuManager : MonoBehaviour
 
             panels[idx].GetComponent<PanelSort>().index = 0;
             panels[idx].SetActive(true);
-            if (PlayerPrefs.HasKey(panels[idx].name + "Score"))
-            {
                 panels[idx].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score") + "%";
-            }
 
-            if (index < panels.Count - 1)
-            {
-                panels[idx + 1].GetComponent<PanelSort>().index = 1;
-                panels[idx + 1].SetActive(true);
-                right.interactable = true;
-                if (PlayerPrefs.HasKey(panels[idx + 1].name + "Score"))
+                Debug.Log(PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score") + "%");
+
+                if (index < panels.Count - 1)
                 {
-                    panels[idx + 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx + 1] + InGameManager.instance.difficulty.ToString() + "Score") + "%";
+                    panels[idx + 1].GetComponent<PanelSort>().index = 1;
+                    panels[idx + 1].SetActive(true);
+                    right.interactable = true;
+                        panels[idx + 1].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(panels[idx + 1] + InGameManager.instance.difficulty.ToString() + "Score",0) + "%";
+                    
                 }
-            }
-            else
-            {
-                right.interactable = false;
-            }
-            SoundManager.instance.MenuHighlightPlay(hightTimes[idx]);
+                else
+                {
+                    right.interactable = false;
+                }
+                SoundManager.instance.MenuHighlightPlay(hightTimes[idx]);
+            
         }
     }
     public void SetDifficultyScore()
@@ -66,10 +62,8 @@ public class MenuManager : MonoBehaviour
 
         panels[idx].GetComponent<PanelSort>().index = 0;
         panels[idx].SetActive(true);
-        if (PlayerPrefs.HasKey(panels[idx].name + "Score"))
-        {
-            panels[idx].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score") + "%";
-        }
+            panels[idx].GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score",0) + "%";
+        
 
     }
     void Awake()
@@ -83,10 +77,10 @@ public class MenuManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    public void RequestGoldAd()
     {
+        AdMobManager.instance.ShowRewardBasedVideo(RewardType.Coin);
     }
-
     public void RightButton()
     {
         if (index < panels.Count - 1)
@@ -96,6 +90,14 @@ public class MenuManager : MonoBehaviour
     public void GoOption()
     {
         InGameManager.instance.state = GameState.Option;
+    }
+    public void GoShop()
+    {
+        InGameManager.instance.state = GameState.Shop;
+    }
+    public void GoMenu()
+    {
+        InGameManager.instance.state = GameState.Menu;
     }
     public void LeftButton()
     {

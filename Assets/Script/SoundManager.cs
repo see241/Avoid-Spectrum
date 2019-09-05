@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     private IEnumerator iStartGame;
     IEnumerator iClearChecker;
     private Coroutine co;
+    int addedGold;
 
     public bool isClear;
 
@@ -64,22 +65,22 @@ public class SoundManager : MonoBehaviour
         _progressBar.value = progressBar.value;
         score.text = ((int)(_progressBar.value * 100)) + "%";
         curSongScore = (int)(_progressBar.value * 100);
-        if (PlayerPrefs.HasKey(InGameManager.instance.curSongName+InGameManager.instance.difficulty.ToString() + "Score"))
-        {
             if (isClear)
             {
                 PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", 100);
             }
-            if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score") < curSongScore)
+            if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score",0) < curSongScore)
                 PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", curSongScore);
+        if (!Player.instance.isRevival)
+        {
+            addedGold = (int)(curSongScore * 0.3f*((int)InGameManager.instance.difficulty+1));
+            InGameManager.instance.AddPlayGold(addedGold);
         }
         else
         {
-            if (isClear)
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", 100);
-            if (!isClear)
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", curSongScore);
+            InGameManager.instance.AddPlayGold((int)(curSongScore * 0.3f * ((int)InGameManager.instance.difficulty + 1)) - addedGold);
         }
+        
         PlayerPrefs.Save();
     }
 

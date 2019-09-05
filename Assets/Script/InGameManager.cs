@@ -15,7 +15,7 @@ public enum ControlType
 
 public enum GameState
 {
-    Main, Menu, InGame,Option
+    Main, Menu, InGame,Option,Shop
 }
 
 public class InGameManager : MonoBehaviour
@@ -29,11 +29,13 @@ public class InGameManager : MonoBehaviour
     public List<UnityEngine.UI.Button> diffSetButtons;
     public List<UnityEngine.UI.Text> diffSetTexts;
     public UnityEngine.UI.Image panel;
+    public UnityEngine.UI.Text coinText;
     float[] difficultys = new float[3] { 1.25f, 1f, 0.85f};
 
     public bool isPause;
     private bool stopFlag;
     public GameObject pauseButton;
+    Color curPlayerColor;
 
     public bool isMusicStarted;
 
@@ -59,6 +61,12 @@ public class InGameManager : MonoBehaviour
     public ControlType controlType;
     private GameState gs;
     private int gold;
+
+    public void AdGold()
+    {
+        Invoke("AddAdGold",0.3f);
+    }
+
     [SerializeField]
     public UnityEngine.UI.Slider slider;
     public int Gold
@@ -68,6 +76,7 @@ public class InGameManager : MonoBehaviour
         {
             gold = value;
             PlayerPrefs.SetInt("Gold", gold);
+            coinText.text = gold.ToString(  );
         }
     }
 
@@ -101,6 +110,14 @@ public class InGameManager : MonoBehaviour
                     AdMobManager.instance.RequestBannerAd();
                 }
             }
+            if (gs == GameState.Shop)
+            {
+                Camera.main.transform.position = new Vector3(0, 10, -10);
+            }
+            else
+            {
+                Camera.main.transform.position = new Vector3(0, 0, -10);
+            }
             if (SoundManager.instance.curSong != null)
             {
                 if (!stopFlag)
@@ -130,24 +147,42 @@ public class InGameManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        if (PlayerPrefs.HasKey("ControlType"))
-        {
-            controlType = (ControlType)PlayerPrefs.GetInt("ControlType");
-        }
-        else
-        {
-            controlType = ControlType.Touch;
-        }
+            controlType = (ControlType)PlayerPrefs.GetInt("ControlType",(int)ControlType.Touch);
+        
         Gold = PlayerPrefs.GetInt("Gold", 0);
         state = GameState.Main;
         isPause = false;
         slider.onValueChanged.AddListener(delegate { MoveSensitiveAdapt(); });
+        slider.value = (PlayerPrefs.GetFloat("MoveSensitive", 1f) - 0.2f) * 1.25f;
         difficulty = Difficulty.Normal;
+        InGameManager.instance.Gold = PlayerPrefs.GetInt("Gold", 0);
+        float r = PlayerPrefs.GetFloat("PlayerColorR", 0.184f);
+        float g = PlayerPrefs.GetFloat("PlayerColorG", 1);
+        float b = PlayerPrefs.GetFloat("PlayerColorB", 1);
+        Player.instance.SetPlayerColor(new Color(r, g, b));
     }
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+            state = GameState.Shop;
+    }
+    public void AddAdGold()
+    {
+        int addgold = 1000;
+        Gold += addgold;
+        Debug.Log("Get "+addgold+" Gold");
+    }
+    public void AddPlayGold(int t)
+    {
+        Gold += t;
+    }
+    public void SetControlType(ControlType type)
+    {
+        controlType = type;
+    }
     void MoveSensitiveAdapt()
     {
-        Player.instance.SetMoveSensitive(0.25f + slider.value * 0.75f);
+        Player.instance.SetMoveSensitive(0.2f + slider.value * 0.8f);
     }
     public float GetDifficulty()
     {

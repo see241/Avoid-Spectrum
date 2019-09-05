@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
     public void Revival()
     {
         revivalButton.interactable = false;
-        AdMobManager.instance.ShowRewardBasedVideo();
+        AdMobManager.instance.ShowRewardBasedVideo(RewardType.Revival);
         //InGameManager.instance.Revival();
     }
 
