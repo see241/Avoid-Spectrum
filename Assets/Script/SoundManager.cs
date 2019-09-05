@@ -153,7 +153,6 @@ public class SoundManager : MonoBehaviour
                 {
                     break;
                 }
-                Debug.Log(songTIme + " : " + curSong.clip.length);
             }
             yield return null;
         }

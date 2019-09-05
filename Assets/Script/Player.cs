@@ -147,6 +147,8 @@ public class Player : MonoBehaviour
                 if (!InGameManager.instance.isPause)
                 {
                     transform.position = lastPos +( (Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos)*moveSensitive  ;
+                    if(((touch.deltaPosition.x * touch.deltaPosition.x) + (touch.deltaPosition.y * touch.deltaPosition.y))>=1)
+                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngle(transform.position, (Vector2)transform.position + touch.deltaPosition)-90));
                     if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
                     {
                         transform.position = transform.position.normalized * 4.24f;
@@ -160,6 +162,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    float GetAngle(Vector2 start, Vector2 end)
+    {
+        Vector2 v2 = end - start;
+        return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+    }
     private void MoveToJoyStick()
     {
         transform.Translate(Joystick.instance.moveVec * Time.deltaTime * speed);
