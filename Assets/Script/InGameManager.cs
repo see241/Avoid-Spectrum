@@ -8,6 +8,7 @@ public enum Difficulty
     Normal, Hard, Expert
 }
 
+[Serializable]
 public enum ControlType
 {
     Touch, Joystick
@@ -15,7 +16,7 @@ public enum ControlType
 
 public enum GameState
 {
-    Main, Menu, InGame,Option,Shop
+    Main, Menu, InGame, Option, Shop
 }
 
 public class InGameManager : MonoBehaviour
@@ -28,26 +29,30 @@ public class InGameManager : MonoBehaviour
     public GameObject dieMenu;
     public List<UnityEngine.UI.Button> diffSetButtons;
     public List<UnityEngine.UI.Text> diffSetTexts;
+    public UnityEngine.UI.Text timeScaleSetText;
+
     public UnityEngine.UI.Image panel;
     public UnityEngine.UI.Text coinText;
-    float[] difficultys = new float[3] { 1.25f, 1f, 0.85f};
+    private float[] difficultys = new float[3] { 1.25f, 1f, 0.85f };
+    public float applyTimeScale;
 
     public bool isPause;
     private bool stopFlag;
     public GameObject pauseButton;
-    Color curPlayerColor;
+    private Color curPlayerColor;
 
     public bool isMusicStarted;
 
     public string curSongName;
-    Difficulty dif;
+    private Difficulty dif;
+
     public Difficulty difficulty
     {
         get { return dif; }
         set
         {
             dif = value;
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 diffSetButtons[i].interactable = true;
                 diffSetTexts[i].color = new Color(1, 1, 1, 0.5f);
@@ -58,17 +63,21 @@ public class InGameManager : MonoBehaviour
             MenuManager.instance.SetDifficultyScore();
         }
     }
+
     public ControlType controlType;
     private GameState gs;
     private int gold;
 
     public void AdGold()
     {
-        Invoke("AddAdGold",0.3f);
+        Invoke("AddAdGold", 0.3f);
     }
 
     [SerializeField]
-    public UnityEngine.UI.Slider slider;
+    public UnityEngine.UI.Slider moveSensitiveSlider;
+
+    public UnityEngine.UI.Slider timeScaleSlider;
+
     public int Gold
     {
         get { return gold; }
@@ -76,7 +85,7 @@ public class InGameManager : MonoBehaviour
         {
             gold = value;
             PlayerPrefs.SetInt("Gold", gold);
-            coinText.text = gold.ToString(  );
+            coinText.text = gold.ToString();
         }
     }
 
@@ -103,6 +112,7 @@ public class InGameManager : MonoBehaviour
                 SoundManager.instance.InitScene();
                 Player.instance.transform.position = Vector2.zero;
             }
+
             if (gs != GameState.InGame)
             {
                 if (!AdMobManager.instance.IsBannerOnScreen())
@@ -126,11 +136,20 @@ public class InGameManager : MonoBehaviour
                     SoundManager.instance.curSong.time = 0;
                 }
             }
+            if (gs == GameState.Option || gs == GameState.InGame)
+            {
+                if (controlType == ControlType.Joystick)
+                    Joystick.instance.gameObject.SetActive(true);
+            }
+            else
+            {
+                Joystick.instance.gameObject.SetActive(false);
+            }
+            Joystick.instance.JoyStickInit();
             stopFlag = false;
             SoundManager.instance.isClear = false;
         }
     }
-
 
     private void Awake()
     {
@@ -142,57 +161,119 @@ public class InGameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+        controlType = (ControlType)PlayerPrefs.GetInt("ControlType", (int)ControlType.Touch);
     }
 
     // Use this for initialization
     private void Start()
     {
-            controlType = (ControlType)PlayerPrefs.GetInt("ControlType",(int)ControlType.Touch);
-        
+        switch (controlType)
+        {
+            case ControlType.Joystick:
+                MenuManager.instance.ChangeControlTypeToJoyStick();
+                break;
+
+            case ControlType.Touch:
+                MenuManager.instance.ChangeControlTypeToTouch();
+                break;
+        }
         Gold = PlayerPrefs.GetInt("Gold", 0);
-        state = GameState.Main;
         isPause = false;
-        slider.onValueChanged.AddListener(delegate { MoveSensitiveAdapt(); });
-        slider.value = (PlayerPrefs.GetFloat("MoveSensitive", 1f) - 0.2f) * 1.25f;
+        moveSensitiveSlider.onValueChanged.AddListener(delegate { MoveSensitiveAdapt(); });
+        moveSensitiveSlider.value = (PlayerPrefs.GetFloat("MoveSensitive", 1f) - 0.2f) * 1.25f;
+        timeScaleSlider.onValueChanged.AddListener(delegate { TextApply(); });
+        float timescale = PlayerPrefs.GetFloat("TimeScale", 1);
+        timeScaleSlider.value = (timescale - 0.75f) / 2;
+        string str = string.Format("TimeSlcale x {0:f2}", timescale);
+        timeScaleSetText.text = str;
+        Time.timeScale = timescale;
+        applyTimeScale = Time.timeScale;
         difficulty = Difficulty.Normal;
         InGameManager.instance.Gold = PlayerPrefs.GetInt("Gold", 0);
         float r = PlayerPrefs.GetFloat("PlayerColorR", 0.184f);
         float g = PlayerPrefs.GetFloat("PlayerColorG", 1);
         float b = PlayerPrefs.GetFloat("PlayerColorB", 1);
         Player.instance.SetPlayerColor(new Color(r, g, b));
+        state = GameState.Main;
     }
-    void Update()
+
+    public void ChangeControlType(ControlType control)
     {
-        if (Input.GetKeyDown(KeyCode.A))
-            state = GameState.Shop;
+        controlType = control;
+        Player.instance.ApplyChangedControlType(control);
+        PlayerPrefs.SetInt("ControlType", (int)controlType);
     }
+
     public void AddAdGold()
     {
         int addgold = 1000;
         Gold += addgold;
-        Debug.Log("Get "+addgold+" Gold");
     }
+
     public void AddPlayGold(int t)
     {
         Gold += t;
     }
+
     public void SetControlType(ControlType type)
     {
         controlType = type;
     }
-    void MoveSensitiveAdapt()
+
+    private void MoveSensitiveAdapt()
     {
-        Player.instance.SetMoveSensitive(0.2f + slider.value * 0.8f);
+        Player.instance.SetMoveSensitive(0.2f + moveSensitiveSlider.value * 0.8f);
     }
+
+    public void SetPerfactSliderValue()
+    {
+        int temp = (int)(timeScaleSlider.value / 0.125);
+        float _temp = timeScaleSlider.value - (temp * 0.125f);
+        if (_temp >= 0.125f / 2)
+        {
+            if (temp != 8)
+                temp += 1;
+        }
+
+        timeScaleSlider.value = temp * 0.125f;
+        applyTimeScale = 0.75f + timeScaleSlider.value * 2;
+        string str = string.Format("TimeSlcale x {0:f2}", applyTimeScale);
+        timeScaleSetText.text = str;
+        Time.timeScale = applyTimeScale;
+        PlayerPrefs.SetFloat("TimeScale", applyTimeScale);
+        PlayerPrefs.Save();
+    }
+
+    private void TextApply()
+    {
+        int temp = (int)(timeScaleSlider.value / 0.125);
+        float _temp = timeScaleSlider.value - (temp * 0.125f);
+        if (_temp >= 0.125f / 2)
+        {
+            if (temp != 8)
+                temp += 1;
+        }
+;
+        applyTimeScale = 0.75f + temp * 0.125f * 2;
+        string str = string.Format("TimeSlcale x {0:f2}", applyTimeScale);
+        if (timeScaleSetText.text != str)
+        {
+            Vibration.Vibrate(1);
+        }
+        timeScaleSetText.text = str;
+    }
+
     public float GetDifficulty()
     {
         return difficultys[(int)difficulty];
     }
+
     public void RevivalReady()
     {
         Invoke("Revival", 0.3f);
     }
-    void Revival()
+
+    private void Revival()
     {
         Player.instance.gameObject.SetActive(true);
         dieMenu.SetActive(false);
@@ -204,7 +285,7 @@ public class InGameManager : MonoBehaviour
     public void PlayerDie(GameObject player)
     {
         ParticleSystem ptc = Instantiate(dieEffect);
-        ptc.transform.position = player.transform.position;                               
+        ptc.transform.position = player.transform.position;
         Destroy(ptc, ptc.duration + ptc.startLifetime);
         SoundManager.instance.SetUIInfo();
         dieMenu.SetActive(true);
@@ -215,12 +296,6 @@ public class InGameManager : MonoBehaviour
             UIManager.instance.StartRevivalTimer();
             Player.instance.isRevival = true;
         }
-    }
-
-    private void ChangeControlType(ControlType type)
-    {
-        controlType = type;
-        PlayerPrefs.SetInt("ControlType", (int)controlType);
     }
 
     private IEnumerator PlayerInvisible()
@@ -238,7 +313,8 @@ public class InGameManager : MonoBehaviour
         SoundManager.instance.curSong.volume = 1;
         Player.instance.GetComponent<CircleCollider2D>().enabled = true;
     }
-    IEnumerator ReadyPlay()
+
+    private IEnumerator ReadyPlay()
     {
         while (Input.touchCount <= 0)
         {

@@ -28,8 +28,10 @@ public class Player : MonoBehaviour
     private bool isMoving;
     public ParticleSystem skilEffct;
     private TrailRenderer trail;
+
     [SerializeField]
-    float moveSensitive;
+    private float moveSensitive;
+
     private void Awake()
     {
         instance = this;
@@ -38,27 +40,59 @@ public class Player : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        GetComponent<SpriteRenderer>().sprite = ShopManager.instance.shapes[PlayerPrefs.GetInt("SavedPlayerShape", 500)];
         collider2D = GetComponent<CircleCollider2D>();
         trail = GetComponent<TrailRenderer>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        if (InGameManager.instance.controlType == ControlType.Joystick)
-            Move = MoveToJoyStick;
-        else
-            Move = MoveToTouch;
+        switch (InGameManager.instance.controlType)
+        {
+            case ControlType.Joystick:
+                Move = MoveToJoyStick;
+                break;
+
+            case ControlType.Touch:
+                Move = MoveToTouch;
+                break;
+        }
     }
+
     public void SetMoveSensitive(float v)
     {
         moveSensitive = v;
         PlayerPrefs.SetFloat("MoveSensitive", moveSensitive);
     }
+
     public float GetMoveSensitive()
     {
         return moveSensitive;
     }
+
     // Update is called once per frame
     private void Update()
     {
         Move();
+    }
+
+    public void ApplyChangedControlType(ControlType type)
+    {
+        switch (type)
+        {
+            case ControlType.Joystick:
+                Move = MoveToJoyStick;
+                Joystick.instance.gameObject.SetActive(true);
+                break;
+
+            case ControlType.Touch:
+                Move = MoveToTouch;
+                Joystick.instance.gameObject.SetActive(false);
+                break;
+        }
+    }
+
+    internal void SetPlayerShape(ShopItem item)
+    {
+        GetComponent<SpriteRenderer>().sprite = ShopManager.instance.shapes[item.itemCode];
+        PlayerPrefs.SetInt("SavedPlayerShape", item.itemCode);
     }
 
     public void Init()
@@ -68,11 +102,15 @@ public class Player : MonoBehaviour
         trail.enabled = false;
         isCooltime = false;
         skilCoolBar.gameObject.SetActive(false);
+        isRevival = false;
+        lastPos = Vector2.zero;
     }
+
     public void RevivalInit()
     {
         lastPos = transform.position;
     }
+
     private void MoveToKeyboard()
     {
         float vX = 0, vY = 0;
@@ -146,9 +184,9 @@ public class Player : MonoBehaviour
             {
                 if (!InGameManager.instance.isPause)
                 {
-                    transform.position = lastPos +( (Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos)*moveSensitive  ;
-                    if(((touch.deltaPosition.x * touch.deltaPosition.x) + (touch.deltaPosition.y * touch.deltaPosition.y))>=1)
-                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngle(transform.position, (Vector2)transform.position + touch.deltaPosition)-90));
+                    transform.position = lastPos + ((Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos) * moveSensitive;
+                    if (((touch.deltaPosition.x * touch.deltaPosition.x) + (touch.deltaPosition.y * touch.deltaPosition.y)) >= 5)
+                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngle(transform.position, (Vector2)transform.position + touch.deltaPosition) - 90));
                     if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
                     {
                         transform.position = transform.position.normalized * 4.24f;
@@ -162,19 +200,25 @@ public class Player : MonoBehaviour
         }
     }
 
-    float GetAngle(Vector2 start, Vector2 end)
+    private float GetAngle(Vector2 start, Vector2 end)
     {
         Vector2 v2 = end - start;
         return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
     }
+
     private void MoveToJoyStick()
     {
-        transform.Translate(Joystick.instance.moveVec * Time.deltaTime * speed);
+        transform.position += (Vector3)(Joystick.instance.moveVec * Time.deltaTime * speed);
+        if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
+        {
+            transform.position = transform.position.normalized * 4.24f;
+        }
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngle(transform.position, (Vector2)transform.position + Joystick.instance.moveVec.normalized) - 90));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        lastPos = Vector2.zero ;
+        lastPos = Vector2.zero;
         InGameManager.instance.PlayerDie(gameObject);
         gameObject.SetActive(false);
     }
@@ -202,10 +246,13 @@ public class Player : MonoBehaviour
         skilCoolBar.gameObject.SetActive(false);
         isCooltime = false;
     }
+
     public void SetPlayerColor(Color color)
     {
         GetComponent<SpriteRenderer>().color = color;
+        ShopManager.instance.latestColor = GetComponent<SpriteRenderer>().color;
     }
+
     public void _ColorChange(Color c, float t)
     {
         StartCoroutine(ColorChange(c, t));

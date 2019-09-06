@@ -104,7 +104,6 @@ public class CircleSpectrum_V3 : MonoBehaviour
             {
                 sw *= -1;
                 StartCoroutine(StartCooltime());
-                Debug.Log("reverse");
             }
             //rotateSpeed = Mathf.MoveTowards(rotateSpeed, sens * 45 * sw, 1);
             rotateSpeed = sens * 30 * sw;
@@ -114,10 +113,12 @@ public class CircleSpectrum_V3 : MonoBehaviour
         applyBulletSpeed = sens / 2 * bulletSpeed;
         sens = 0;
     }
+
     public void SetDifficult(float f)
     {
-        diff=0.15f*f;
+        diff = 0.15f * f;
     }
+
     private IEnumerator iStartCooltime(int t)
     {
         coolTime[t] = true;

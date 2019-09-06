@@ -14,6 +14,5 @@ public class Debug_ : MonoBehaviour
 
     public void DebugButton(string log)
     {
-        Debug.Log(log);
     }
 }

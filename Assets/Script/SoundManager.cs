@@ -17,13 +17,13 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource curSong;
     private IEnumerator iStartGame;
-    IEnumerator iClearChecker;
+    private IEnumerator iClearChecker;
     private Coroutine co;
-    int addedGold;
+    private int addedGold;
 
     public bool isClear;
 
-    float songTIme;
+    private float songTIme;
 
     private void Awake()
     {
@@ -44,7 +44,6 @@ public class SoundManager : MonoBehaviour
     {
         StartCoroutine(iStartGame);
         isClear = false;
-       
     }
 
     public void CloseScene()
@@ -54,7 +53,7 @@ public class SoundManager : MonoBehaviour
         iStartGame = StartGame();
         StopCoroutine(iClearChecker);
         iClearChecker = ClearChacker();
-       
+
         AllSoundStop();
         InGameManager.instance.isMusicStarted = false;
     }
@@ -65,22 +64,13 @@ public class SoundManager : MonoBehaviour
         _progressBar.value = progressBar.value;
         score.text = ((int)(_progressBar.value * 100)) + "%";
         curSongScore = (int)(_progressBar.value * 100);
-            if (isClear)
-            {
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", 100);
-            }
-            if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score",0) < curSongScore)
-                PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", curSongScore);
-        if (!Player.instance.isRevival)
+        if (isClear)
         {
-            addedGold = (int)(curSongScore * 0.3f*((int)InGameManager.instance.difficulty+1));
-            InGameManager.instance.AddPlayGold(addedGold);
+            PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", 100);
         }
-        else
-        {
-            InGameManager.instance.AddPlayGold((int)(curSongScore * 0.3f * ((int)InGameManager.instance.difficulty + 1)) - addedGold);
-        }
-        
+        if (PlayerPrefs.GetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", 0) < curSongScore)
+            PlayerPrefs.SetInt(InGameManager.instance.curSongName + InGameManager.instance.difficulty.ToString() + "Score", curSongScore);
+
         PlayerPrefs.Save();
     }
 
@@ -140,15 +130,16 @@ public class SoundManager : MonoBehaviour
         curSong.volume = 1;
         InGameManager.instance.isMusicStarted = true;
         StartCoroutine(iClearChecker);
-        
     }
-    IEnumerator ClearChacker()
+
+    private IEnumerator ClearChacker()
     {
         while (true)
         {
-            if (InGameManager.instance.isPause==false)
+            if (InGameManager.instance.isPause == false)
             {
-                songTIme += Time.deltaTime;
+                songTIme += Time.deltaTime / InGameManager.instance.applyTimeScale;
+                Debug.Log(songTIme + " : " + curSong.clip.length);
                 if (songTIme > curSong.clip.length)
                 {
                     break;

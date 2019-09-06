@@ -18,8 +18,8 @@ public class Joystick : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        curJoystick = Instantiate(joystick);
-        curJoystickBackGround = Instantiate(joystickBackGround);
+        curJoystick = Instantiate(joystick, transform);
+        curJoystickBackGround = Instantiate(joystickBackGround, transform);
     }
 
     // Update is called once per frame
@@ -52,10 +52,17 @@ public class Joystick : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Ended)
             {
-                curJoystickBackGround.SetActive(false);
-                curJoystick.SetActive(false);
-                moveVec = Vector2.zero;
+                JoyStickInit();
             }
         }
+    }
+
+    public void JoyStickInit()
+    {
+        curJoystickBackGround.SetActive(false);
+        curJoystick.SetActive(false);
+        curJoystickBackGround.transform.position = Vector3.zero;
+        curJoystick.transform.position = Vector3.zero;
+        moveVec = Vector2.zero;
     }
 }

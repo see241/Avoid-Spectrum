@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
             swPause = true;
         }
     }
+
     public void Restart()
     {
         Time.timeScale = 1;
@@ -62,7 +63,24 @@ public class UIManager : MonoBehaviour
         SoundManager.instance.InitScene();
         Player.instance.Init();
         pauseButton.SetActive(true);
+    }
+
+    public void GameResultApply()
+    {
+        InGameManager.instance.AddPlayGold((int)(SoundManager.instance.curSongScore * 0.2f * ((int)InGameManager.instance.difficulty + 1) * InGameManager.instance.applyTimeScale)); Time.timeScale = InGameManager.instance.applyTimeScale;
+        PoolManager.instance.CleanPool();
+        SoundManager.instance.AllSoundStop();
+        SoundManager.instance.CloseScene();
+        PoolManager.instance.CleanPool();
+        InGameManager.instance.isPause = false;
+        pauseMenu.SetActive(false);
+        dieMenu.SetActive(false);
+        clearMenu.SetActive(false);
+        pauseButton.SetActive(true);
         Player.instance.isRevival = false;
+
+        InGameManager.instance.state = GameState.Menu;
+        GameObject.Find("MenuManager").GetComponent<MenuManager>().index = GameObject.Find("MenuManager").GetComponent<MenuManager>().index;
     }
 
     public void Revival()
@@ -112,8 +130,8 @@ public class UIManager : MonoBehaviour
         {
             TextMesh _text = Instantiate(text, transform);
             _text.text = (3 - i).ToString();
+            Destroy(_text.gameObject, 1);
             yield return new WaitForSeconds(1f);
-            Destroy(_text.gameObject);
         }
 
         InGameManager.instance.isPause = false;

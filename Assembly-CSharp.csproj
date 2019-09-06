@@ -125,8 +125,11 @@
      <Compile Include="Assets\Script\ShopManager.cs" />
      <Compile Include="Assets\Script\SoundManager.cs" />
      <Compile Include="Assets\Script\TestPlayer.cs" />
+     <Compile Include="Assets\Script\TestPlayerJoyStic.cs" />
      <Compile Include="Assets\Script\UIManager.cs" />
+     <Compile Include="Assets\Script\Vibration.cs" />
      <Compile Include="Assets\Script\ZigZagSpectrum.cs" />
+     <Compile Include="Assets\SliderGrid.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Administrator/Desktop/Projects/Void-Spectrum/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
