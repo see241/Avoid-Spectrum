@@ -139,7 +139,6 @@ public class SoundManager : MonoBehaviour
             if (InGameManager.instance.isPause == false)
             {
                 songTIme += Time.deltaTime / InGameManager.instance.applyTimeScale;
-                Debug.Log(songTIme + " : " + curSong.clip.length);
                 if (songTIme > curSong.clip.length)
                 {
                     break;

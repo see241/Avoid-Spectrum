@@ -110,6 +110,7 @@
      <Compile Include="Assets\Script\CircleSpectrum_V3.cs" />
      <Compile Include="Assets\Script\Command.cs" />
      <Compile Include="Assets\Script\Debug_.cs" />
+     <Compile Include="Assets\Script\EscapeScene.cs" />
      <Compile Include="Assets\Script\InGameManager.cs" />
      <Compile Include="Assets\Script\Joystick.cs" />
      <Compile Include="Assets\Script\MainUI.cs" />
@@ -126,6 +127,7 @@
      <Compile Include="Assets\Script\SoundManager.cs" />
      <Compile Include="Assets\Script\TestPlayer.cs" />
      <Compile Include="Assets\Script\TestPlayerJoyStic.cs" />
+     <Compile Include="Assets\Script\Tutorial.cs" />
      <Compile Include="Assets\Script\UIManager.cs" />
      <Compile Include="Assets\Script\Vibration.cs" />
      <Compile Include="Assets\Script\ZigZagSpectrum.cs" />

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class TestPlayerJoyStic : MonoBehaviour
 {
-    private float speed;
+    public float speed;
 
     private void Start()
     {
@@ -18,5 +20,10 @@ public class TestPlayerJoyStic : MonoBehaviour
     private void MoveToJoyStick()
     {
         transform.Translate(Joystick.instance.moveVec * Time.deltaTime * speed * Player.instance.GetMoveSensitive());
+    }
+
+    public void AdaptTimeScale()
+    {
+        speed = 3 / Time.timeScale;
     }
 }

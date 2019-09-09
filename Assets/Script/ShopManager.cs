@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void CallBack();
+
 public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance;

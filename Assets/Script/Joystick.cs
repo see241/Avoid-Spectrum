@@ -5,24 +5,18 @@ public class Joystick : MonoBehaviour
     public static Joystick instance;
     public GameObject joystick;
     public GameObject joystickBackGround;
-    private GameObject curJoystick;
-    private GameObject curJoystickBackGround;
+    public GameObject curJoystick;
+    public GameObject curJoystickBackGround;
 
     public Vector2 moveVec;
 
     private void Awake()
     {
         instance = this;
-    }
-
-    // Use this for initialization
-    private void Start()
-    {
         curJoystick = Instantiate(joystick, transform);
         curJoystickBackGround = Instantiate(joystickBackGround, transform);
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (InGameManager.instance.controlType == ControlType.Joystick)

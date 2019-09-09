@@ -42,7 +42,7 @@ public class InGameManager : MonoBehaviour
     private Color curPlayerColor;
 
     public bool isMusicStarted;
-
+    public TestPlayerJoyStic testPlayerJoyStick;
     public string curSongName;
     private Difficulty dif;
 
@@ -78,6 +78,16 @@ public class InGameManager : MonoBehaviour
 
     public UnityEngine.UI.Slider timeScaleSlider;
 
+    public float GetApplyTimeScale(float t)
+    {
+        return t * applyTimeScale;
+    }
+
+    public float GetApplyTimeScale()
+    {
+        return applyTimeScale;
+    }
+
     public int Gold
     {
         get { return gold; }
@@ -94,10 +104,27 @@ public class InGameManager : MonoBehaviour
         get { return gs; }
         set
         {
-            if (gs == GameState.Main)
+            if (gs == GameState.Main || gs == GameState.Option || gs == GameState.Shop)
             {
                 stopFlag = true;
             }
+            else
+            {
+                if (gs == GameState.Menu)
+                {
+                    if (value != GameState.InGame)
+                    {
+                        stopFlag = true;
+                    }
+                    else
+                    {
+                        stopFlag = false;
+                    }
+                }
+                else
+                    stopFlag = false;
+            }
+
             gs = value;
             for (int i = 0; i < uiList.Count; i++)
             {
@@ -146,7 +173,6 @@ public class InGameManager : MonoBehaviour
                 Joystick.instance.gameObject.SetActive(false);
             }
             Joystick.instance.JoyStickInit();
-            stopFlag = false;
             SoundManager.instance.isClear = false;
         }
     }
@@ -187,6 +213,8 @@ public class InGameManager : MonoBehaviour
         string str = string.Format("TimeSlcale x {0:f2}", timescale);
         timeScaleSetText.text = str;
         Time.timeScale = timescale;
+        Player.instance.AdaptTimeScale();
+        testPlayerJoyStick.AdaptTimeScale();
         applyTimeScale = Time.timeScale;
         difficulty = Difficulty.Normal;
         InGameManager.instance.Gold = PlayerPrefs.GetInt("Gold", 0);
@@ -240,6 +268,8 @@ public class InGameManager : MonoBehaviour
         string str = string.Format("TimeSlcale x {0:f2}", applyTimeScale);
         timeScaleSetText.text = str;
         Time.timeScale = applyTimeScale;
+        Player.instance.AdaptTimeScale();
+        testPlayerJoyStick.AdaptTimeScale();
         PlayerPrefs.SetFloat("TimeScale", applyTimeScale);
         PlayerPrefs.Save();
     }
@@ -255,6 +285,7 @@ public class InGameManager : MonoBehaviour
         }
 ;
         applyTimeScale = 0.75f + temp * 0.125f * 2;
+
         string str = string.Format("TimeSlcale x {0:f2}", applyTimeScale);
         if (timeScaleSetText.text != str)
         {
@@ -296,6 +327,7 @@ public class InGameManager : MonoBehaviour
             UIManager.instance.StartRevivalTimer();
             Player.instance.isRevival = true;
         }
+        UIManager.instance.coinText.text = (int)(SoundManager.instance.curSongScore * 0.2f * ((int)difficulty + 1) * applyTimeScale) + "";
     }
 
     private IEnumerator PlayerInvisible()

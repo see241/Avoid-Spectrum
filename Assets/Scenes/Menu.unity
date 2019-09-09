@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a09b688fc325894bb792d83f4ea0e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!212 &25238602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -851,8 +852,8 @@ MonoBehaviour:
     m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 275
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1463,6 +1464,12 @@ MonoBehaviour:
   text: {fileID: 102933064079556832, guid: 933d9e6bdd1253649999fb4485599c7c, type: 2}
   revivalButton: {fileID: 1890404890}
   revivalButtonImage: {fileID: 934638377}
+  goldCoinImage: {fileID: 114956750193995000, guid: 7d0d2e37ea0f67e41b40206a76cab69a,
+    type: 2}
+  canvas: {fileID: 1028662616}
+  popupText: {fileID: 114513305225776826, guid: d9a28d01bb60b2c498c094e8794e891f,
+    type: 2}
+  coinText: {fileID: 473919746}
 --- !u!4 &120679959
 Transform:
   m_ObjectHideFlags: 0
@@ -2348,7 +2355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146, y: 170}
+  m_AnchoredPosition: {x: -146, y: 185.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &245849165
@@ -2363,7 +2370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6862745, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2383,16 +2390,17 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Font : \uBC30\uBBFC \uD55C\uB098\uCCB4Pro\nSound:\n\nArc North - Catch
-    Me When I Fall (Instrumental Edit)\nLink to the song : https://youtu.be/XCDIKs4JjXg\n\nSong
-    : Mike Leite - A.L.O.N.E.\nFollow Artist : https://soundcloud.com/mikeleite\nMusic
-    promoted by DayDreamSound : https://youtu.be/ouI_8AG0UzQ\n\nMusic provided by
-    Argofox:\nGhost'n'Ghost - Red Lights\nhttps://youtu.be/lL_XgZvtHJo\n\nSong : P!EN
-    - Rain On My Hand\nFollow Artist : http://bit.ly/2SbgUwr\nMusic promoted by DayDreamSound
-    : https://youtu.be/u6BGcxPv_X0\n\nSong : Audigy & Lucas Larvenz - Time\nFollow
-    Artist : https://soundcloud.com/audigyofficial\nMusic promoted by DayDreamSound
-    : https://youtu.be/Ha-ZXBLuz5k\n\nSong : Nux J - Little Phantom\nFollow Artist
-    : https://www.youtube.com/c/NuxJSound\nMusic promoted by DayDreamSound : https://youtu.be/epfw0JFnzN0\n"
+  m_Text: "Font : \uBC30\uBBFC \uD55C\uB098\uCCB4Pro\r\n\r\nSound:\r\r\nArc North
+    - Catch Me When I Fall (Instrumental Edit)\r\r\nLink to the song : https://youtu.be/XCDIKs4JjXg\r
+    \r\n\r\nSong : Mike Leite - A.L.O.N.E.\r\n\rFollow Artist : https://soundcloud.com/mikeleite\r\r\nMusic
+    promoted by DayDreamSound : https://youtu.be/ouI_8AG0UzQ\r\n\r\r\nMusic provided
+    by Argofox:\r\r\nGhost'n'Ghost - Red Lights\r\r\nhttps://youtu.be/lL_XgZvtHJo\r
+    \r\n\r\nSong : P!EN - Rain On My Hand\r\r\nFollow Artist : http://bit.ly/2SbgUwr\r\r\nMusic
+    promoted by DayDreamSound : https://youtu.be/u6BGcxPv_X0\r \r\n\r\nSong : Audigy
+    & Lucas Larvenz - Time\r\r\nFollow Artist : https://soundcloud.com/audigyofficial\r\r\nMusic
+    promoted by DayDreamSound : https://youtu.be/Ha-ZXBLuz5k\r\n\r\nSong : Nux J -
+    Little Phantom\r\r\nFollow Artist : https://www.youtube.com/c/NuxJSound\r\nMusic
+    promoted by DayDreamSound :\n https://youtu.be/epfw0JFnzN0"
 --- !u!222 &245849166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2972,6 +2980,7 @@ GameObject:
   m_Component:
   - component: {fileID: 315057289}
   - component: {fileID: 315057290}
+  - component: {fileID: 315057291}
   m_Layer: 0
   m_Name: MenuObject
   m_TagString: Untagged
@@ -3006,6 +3015,17 @@ MonoBehaviour:
   keyButton:
     key: 0
     button: {fileID: 0}
+--- !u!114 &315057291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 315057288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead466bd17618c4a93f84f3c1f9e90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &323003305
 GameObject:
   m_ObjectHideFlags: 0
@@ -3465,7 +3485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4148,6 +4168,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 469223563}
+  - component: {fileID: 469223564}
   m_Layer: 0
   m_Name: OptionObject
   m_TagString: Untagged
@@ -4170,6 +4191,91 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &469223564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 469223562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead466bd17618c4a93f84f3c1f9e90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &473919744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 473919745}
+  - component: {fileID: 473919747}
+  - component: {fileID: 473919746}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &473919745
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473919744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 655628955}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 116.2, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &473919746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473919744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9960785, g: 0.98823535, b: 0.49411768, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 66647d1e906335a4cbb0c89085650ee9, type: 3}
+    m_FontSize: 22
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 275
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &473919747
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473919744}
 --- !u!1 &476732396
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,6 +4309,7 @@ RectTransform:
   - {fileID: 744499565}
   - {fileID: 96674674}
   - {fileID: 76948078}
+  - {fileID: 655628955}
   m_Father: {fileID: 636959353}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4655,7 +4762,7 @@ GameObject:
   - component: {fileID: 528123669}
   - component: {fileID: 528123668}
   m_Layer: 0
-  m_Name: InGameManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4703,6 +4810,7 @@ MonoBehaviour:
   isPause: 0
   pauseButton: {fileID: 127656651}
   isMusicStarted: 0
+  testPlayerJoyStick: {fileID: 25238601}
   curSongName: 
   controlType: 0
   moveSensitiveSlider: {fileID: 1064372948}
@@ -5539,7 +5647,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Thanks for help
+  m_Text: License
 --- !u!222 &629896121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5584,6 +5692,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &655628954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 655628955}
+  - component: {fileID: 655628957}
+  - component: {fileID: 655628956}
+  m_Layer: 5
+  m_Name: Coin (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &655628955
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 655628954}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.1557434, y: 1.1557434, z: 1.1557434}
+  m_Children:
+  - {fileID: 473919745}
+  m_Father: {fileID: 476732397}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -10.2, y: 36.1}
+  m_SizeDelta: {x: 25, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &655628956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 655628954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 92f9e2e7a53a1436e94c3492df31bb51, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &655628957
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 655628954}
 --- !u!1001 &672190577
 Prefab:
   m_ObjectHideFlags: 0
@@ -7270,7 +7447,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 120679958}
-        m_MethodName: Restart
+        m_MethodName: GameResultApplyRestart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8391,7 +8568,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 120679958}
-        m_MethodName: BackHome
+        m_MethodName: GameResultApply
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10848,6 +11025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443033004}
   - component: {fileID: 1443033005}
+  - component: {fileID: 1443033006}
   m_Layer: 0
   m_Name: MainObject
   m_TagString: Untagged
@@ -10880,6 +11058,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 394935506}
+--- !u!114 &1443033006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1443033003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead466bd17618c4a93f84f3c1f9e90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1447535958
 GameObject:
   m_ObjectHideFlags: 0
@@ -10888,6 +11077,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1447535959}
+  - component: {fileID: 1447535960}
   m_Layer: 0
   m_Name: InGameObject
   m_TagString: Untagged
@@ -10913,6 +11103,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1447535960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1447535958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead466bd17618c4a93f84f3c1f9e90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1454144842
 GameObject:
   m_ObjectHideFlags: 0
@@ -13144,6 +13345,8 @@ MonoBehaviour:
   joystick: {fileID: 1868799617738500, guid: c9f5622dbff71fa41b62b1868a3d8215, type: 2}
   joystickBackGround: {fileID: 1279726419852290, guid: b8ea8f9136a387c49bc6540ae75c7883,
     type: 2}
+  curJoystick: {fileID: 0}
+  curJoystickBackGround: {fileID: 0}
   moveVec: {x: 0, y: 0}
 --- !u!4 &1662612540
 Transform:
@@ -14711,6 +14914,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1875520458}
+  - component: {fileID: 1875520459}
   m_Layer: 0
   m_Name: ShopObject
   m_TagString: Untagged
@@ -14731,6 +14935,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1875520459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1875520457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead466bd17618c4a93f84f3c1f9e90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1876391129
 GameObject:
   m_ObjectHideFlags: 0

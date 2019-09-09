@@ -251,11 +251,17 @@ public class Player : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = color;
         ShopManager.instance.latestColor = GetComponent<SpriteRenderer>().color;
+        InGameManager.instance.dieEffect.startColor = color;
     }
 
     public void _ColorChange(Color c, float t)
     {
         StartCoroutine(ColorChange(c, t));
+    }
+
+    public void AdaptTimeScale()
+    {
+        speed = 3 / Time.timeScale;
     }
 
     private IEnumerator ColorChange(Color c, float t)
