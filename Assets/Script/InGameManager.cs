@@ -173,6 +173,7 @@ public class InGameManager : MonoBehaviour
                 Joystick.instance.gameObject.SetActive(false);
             }
             Joystick.instance.JoyStickInit();
+            UIManager.instance.Init();
             SoundManager.instance.isClear = false;
         }
     }

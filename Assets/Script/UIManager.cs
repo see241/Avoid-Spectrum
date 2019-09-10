@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     public Canvas canvas;
     public Text popupText;
     public Text coinText;
+    private bool duringReceiveResult;
 
     // Use this for initialization
     private void Awake()
@@ -38,6 +39,11 @@ public class UIManager : MonoBehaviour
         {
             Clear();
         }
+    }
+
+    public void Init()
+    {
+        duringReceiveResult = false;
     }
 
     public void Pause()
@@ -73,20 +79,24 @@ public class UIManager : MonoBehaviour
 
     public void GameResultApply()
     {
-        if (SoundManager.instance.isClear)
+        if (!duringReceiveResult)
         {
-            int result = 20 * ((int)InGameManager.instance.difficulty + 1) * (int)InGameManager.instance.applyTimeScale;
-            StartCoroutine(AddGoldAnimation_BackHome(result));
-        }
-        else
-        {
-            int result = (int)(SoundManager.instance.curSongScore * 0.2f * ((int)InGameManager.instance.difficulty + 1) * InGameManager.instance.applyTimeScale);
-            if (result > 0)
+            if (SoundManager.instance.isClear)
+            {
+                int result = 20 * ((int)InGameManager.instance.difficulty + 1) * (int)InGameManager.instance.applyTimeScale;
                 StartCoroutine(AddGoldAnimation_BackHome(result));
+            }
             else
             {
-                BackHome();
+                int result = (int)(SoundManager.instance.curSongScore * 0.2f * ((int)InGameManager.instance.difficulty + 1) * InGameManager.instance.applyTimeScale);
+                if (result > 0)
+                    StartCoroutine(AddGoldAnimation_BackHome(result));
+                else
+                {
+                    BackHome();
+                }
             }
+            duringReceiveResult = true;
         }
         //StartCoroutine(AddGoldAnimation(100));
     }

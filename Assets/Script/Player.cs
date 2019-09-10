@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     private bool isMoving;
     public ParticleSystem skilEffct;
     private TrailRenderer trail;
+    private bool isDoubleTouch;
+    private bool beginInitFlag;
 
     [SerializeField]
     private float moveSensitive;
@@ -175,13 +177,17 @@ public class Player : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
             if (touch.phase == TouchPhase.Began)
             {
                 beginPos = Camera.main.ScreenToWorldPoint(touch.position);
             }
             if (touch.phase == TouchPhase.Moved)
             {
+                if (beginInitFlag)
+                {
+                    beginPos = Camera.main.ScreenToWorldPoint(touch.position);
+                    beginInitFlag = false;
+                }
                 if (!InGameManager.instance.isPause)
                 {
                     transform.position = lastPos + ((Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos) * moveSensitive;
@@ -196,7 +202,12 @@ public class Player : MonoBehaviour
             if (touch.phase == TouchPhase.Ended)
             {
                 lastPos = transform.position;
+                beginInitFlag = true;
             }
+        }
+        else
+        {
+            isDoubleTouch = false;
         }
     }
 
