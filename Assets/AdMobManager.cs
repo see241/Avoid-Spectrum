@@ -32,7 +32,8 @@ public class AdMobManager : MonoBehaviour
 
     private void Start()
     {
-        string appId = "ca-app-pub-6915619357801525/5075173068";
+        //string appId = "ca-app-pub-6915619357801525/5075173068";
+        string appId = "ca-app-pub-6915619357801525~2134504325";
 
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
@@ -64,10 +65,13 @@ public class AdMobManager : MonoBehaviour
 
     public void RequestBannerAd()
     {
-        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        Debug.Log("BannerAdLoad Start");
+        //string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        string adUnitId = "ca-app-pub-6915619357801525/3355376218";
         AdRequest adRequest = new AdRequest.Builder().Build();
         bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
         bannerView.LoadAd(adRequest);
+        Debug.Log("BannerAdLoad End");
     }
 
     public void DestroyBannerAd()
@@ -78,11 +82,14 @@ public class AdMobManager : MonoBehaviour
 
     public void RequestRewardBasedVideoAd()
     {
-        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        Debug.Log("VideoAdLoad Start");
+        //string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        string adUnitId = "ca-app-pub-6915619357801525/5075173068";
 
         AdRequest adRequest = new AdRequest.Builder().Build();
         // Create a 320x50 banner at the top of the screen.
         rewardBasedVideoAd.LoadAd(adRequest, adUnitId);
+        Debug.Log("VideoAdLoad End");
     }
 
     public void ShowRewardBasedVideo(RewardType ad)

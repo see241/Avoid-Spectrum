@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     private bool isMoving;
     public ParticleSystem skilEffct;
     private TrailRenderer trail;
-    private bool isDoubleTouch;
     private bool beginInitFlag;
+    private int lastTouchCount;
 
     [SerializeField]
     private float moveSensitive;
@@ -177,9 +177,18 @@ public class Player : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+            if (lastTouchCount < Input.touchCount)
+            {
+                beginInitFlag = true;
+                lastPos = transform.position;
+            }
             if (touch.phase == TouchPhase.Began)
             {
                 beginPos = Camera.main.ScreenToWorldPoint(touch.position);
+                if (InGameManager.instance.isPause)
+                {
+                    beginInitFlag = true;
+                }
             }
             if (touch.phase == TouchPhase.Moved)
             {
@@ -191,7 +200,7 @@ public class Player : MonoBehaviour
                 if (!InGameManager.instance.isPause)
                 {
                     transform.position = lastPos + ((Vector2)Camera.main.ScreenToWorldPoint(touch.position) - beginPos) * moveSensitive;
-                    if (((touch.deltaPosition.x * touch.deltaPosition.x) + (touch.deltaPosition.y * touch.deltaPosition.y)) >= 5)
+                    if (((touch.deltaPosition.x * touch.deltaPosition.x) + (touch.deltaPosition.y * touch.deltaPosition.y)) >= 3)
                         transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngle(transform.position, (Vector2)transform.position + touch.deltaPosition) - 90));
                     if (Vector2.Distance(transform.position, Vector2.zero) > 4.25f)
                     {
@@ -205,10 +214,7 @@ public class Player : MonoBehaviour
                 beginInitFlag = true;
             }
         }
-        else
-        {
-            isDoubleTouch = false;
-        }
+        lastTouchCount = Input.touchCount;
     }
 
     private float GetAngle(Vector2 start, Vector2 end)
