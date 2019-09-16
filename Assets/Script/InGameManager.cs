@@ -211,7 +211,7 @@ public class InGameManager : MonoBehaviour
         timeScaleSlider.onValueChanged.AddListener(delegate { TextApply(); });
         float timescale = PlayerPrefs.GetFloat("TimeScale", 1);
         timeScaleSlider.value = (timescale - 0.75f) / 2;
-        string str = string.Format("TimeSlcale x {0:f2}", timescale);
+        string str = string.Format("Bullet Speed x {0:f2}", timescale);
         timeScaleSetText.text = str;
         Time.timeScale = timescale;
         Player.instance.AdaptTimeScale();
@@ -235,7 +235,7 @@ public class InGameManager : MonoBehaviour
 
     public void AddAdGold()
     {
-        int addgold = 1000;
+        int addgold = UnityEngine.Random.Range(15, 31);
         Gold += addgold;
     }
 
@@ -266,7 +266,7 @@ public class InGameManager : MonoBehaviour
 
         timeScaleSlider.value = temp * 0.125f;
         applyTimeScale = 0.75f + timeScaleSlider.value * 2;
-        string str = string.Format("TimeSlcale x {0:f2}", applyTimeScale);
+        string str = string.Format("Bullet Speed x {0:f2}", applyTimeScale);
         timeScaleSetText.text = str;
         Time.timeScale = applyTimeScale;
         Player.instance.AdaptTimeScale();
@@ -287,7 +287,7 @@ public class InGameManager : MonoBehaviour
 ;
         applyTimeScale = 0.75f + temp * 0.125f * 2;
 
-        string str = string.Format("TimeSlcale x {0:f2}", applyTimeScale);
+        string str = string.Format("Bullet Speed x {0:f2}", applyTimeScale);
         if (timeScaleSetText.text != str)
         {
             Vibration.Vibrate(1);

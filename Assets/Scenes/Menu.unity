@@ -1200,7 +1200,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 70
+  m_Text: 157
 --- !u!222 &87862714
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1255,7 +1255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 1
-  cost: 98
+  cost: 243
   isLock: 1
   button: {fileID: 1642831172}
   image: {fileID: 1606510295}
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 0
-  cost: 49
+  cost: 125
   isLock: 1
   button: {fileID: 408539313}
   image: {fileID: 261035}
@@ -2149,7 +2149,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 22
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
@@ -2160,7 +2160,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 37
+  m_Text: Free
 --- !u!222 &210581713
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3364,7 +3364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 0
-  cost: 63
+  cost: 60
   isLock: 1
   button: {fileID: 416721307}
   image: {fileID: 1862510172}
@@ -3665,6 +3665,81 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 408539311}
+--- !u!1 &416294846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 416294847}
+  - component: {fileID: 416294849}
+  - component: {fileID: 416294848}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &416294847
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 416294846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1455264954}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 109.7, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &416294848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 416294846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.88235295, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: fa390f07454e0f04090724b14126dce7, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "\uAD11\uACE0 \uC2DC\uCCAD\uC2DC \uC18C\uB7C9\uC758 \uBE44\uD2B8\uB97C \uD68D\uB4DD\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+--- !u!222 &416294849
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 416294846}
 --- !u!1 &416721305
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,7 +3911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 0
-  cost: 3500
+  cost: 85
   isLock: 1
   button: {fileID: 1104392038}
   image: {fileID: 1440643935}
@@ -6070,7 +6145,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 86
+  m_Text: 175
 --- !u!222 &698779200
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6372,7 +6447,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 98
+  m_Text: 243
 --- !u!222 &707982284
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9980,7 +10055,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 63
+  m_Text: 60
 --- !u!222 &1291025765
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10481,7 +10556,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 41
+  m_Text: 141
 --- !u!222 &1356347355
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11400,7 +11475,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 416294847}
   m_Father: {fileID: 944584167}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12087,7 +12163,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 49
+  m_Text: 125
 --- !u!222 &1512779899
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12317,8 +12393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 0
-  cost: 37
-  isLock: 0
+  cost: 0
+  isLock: 1
   button: {fileID: 707767955}
   image: {fileID: 1160491016}
   itemCode: 0
@@ -12389,7 +12465,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3500
+  m_Text: 85
 --- !u!222 &1578293695
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13409,7 +13485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 1
-  cost: 70
+  cost: 157
   isLock: 1
   button: {fileID: 1361019917}
   image: {fileID: 1561289571}
@@ -13713,7 +13789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 1
-  cost: 86
+  cost: 175
   isLock: 1
   button: {fileID: 261422085}
   image: {fileID: 1110888420}
@@ -14641,7 +14717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 1
-  cost: 41
+  cost: 141
   isLock: 1
   button: {fileID: 619031552}
   image: {fileID: 856848908}
@@ -15788,7 +15864,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 22
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
@@ -15799,7 +15875,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 47
+  m_Text: Free
 --- !u!222 &1984859046
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16182,8 +16258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemtype: 1
-  cost: 47
-  isLock: 0
+  cost: 0
+  isLock: 1
   button: {fileID: 1454144844}
   image: {fileID: 1876391131}
   itemCode: 500
@@ -16255,7 +16331,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TimeSlcale x 1.0
+  m_Text: Bullet Speed x 1.0
 --- !u!222 &2105214064
 CanvasRenderer:
   m_ObjectHideFlags: 0

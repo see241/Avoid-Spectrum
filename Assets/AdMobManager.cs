@@ -39,9 +39,33 @@ public class AdMobManager : MonoBehaviour
         MobileAds.Initialize(appId);
 
         rewardBasedVideoAd = RewardBasedVideoAd.Instance;
+        rewardBasedVideoAd.OnAdLoaded += RewardBasedVideoAd_OnAdLoaded;
+        rewardBasedVideoAd.OnAdFailedToLoad += RewardBasedVideoAd_OnAdFailedToLoad;
         rewardBasedVideoAd.OnAdRewarded += RewardBasedVideoAd_OnAdRewarded;
         rewardBasedVideoAd.OnAdClosed += RewardBasedVideoAd_OnAdClosed;
+        bannerView.OnAdLoaded += BannerView_OnAdLoaded;
+        bannerView.OnAdFailedToLoad += BannerView_OnAdFailedToLoad;
         RequestRewardBasedVideoAd();
+    }
+
+    private void RewardBasedVideoAd_OnAdFailedToLoad(object sender, AdFailedToLoadEventArgs e)
+    {
+        Debug.Log("RewardBasedVideoAd_OnAdFailedToLoad\n\tErrorLog  ->" + e.Message);
+    }
+
+    private void RewardBasedVideoAd_OnAdLoaded(object sender, EventArgs e)
+    {
+        Debug.Log("RewardBasedVideoAd_OnAdLoaded");
+    }
+
+    private void BannerView_OnAdFailedToLoad(object sender, AdFailedToLoadEventArgs e)
+    {
+        Debug.Log("BannerView_OnAdFailedToLoad\n\tErrorLog  ->" + e.Message);
+    }
+
+    private void BannerView_OnAdLoaded(object sender, EventArgs e)
+    {
+        Debug.Log("BannerView_OnAdLoaded");
     }
 
     private void RewardBasedVideoAd_OnAdClosed(object sender, EventArgs e)
@@ -65,13 +89,20 @@ public class AdMobManager : MonoBehaviour
 
     public void RequestBannerAd()
     {
-        Debug.Log("BannerAdLoad Start");
-        //string adUnitId = "ca-app-pub-3940256099942544/6300978111";
-        string adUnitId = "ca-app-pub-6915619357801525/3355376218";
-        AdRequest adRequest = new AdRequest.Builder().Build();
-        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
-        bannerView.LoadAd(adRequest);
-        Debug.Log("BannerAdLoad End");
+        try
+        {
+            Debug.Log("BannerAdLoad Start");
+            //string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+            string adUnitId = "ca-app-pub-6915619357801525/4373464909";
+            AdRequest adRequest = new AdRequest.Builder().Build();
+            bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
+            bannerView.LoadAd(adRequest);
+            Debug.Log("BannerAdLoad End");
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
     }
 
     public void DestroyBannerAd()
@@ -84,7 +115,7 @@ public class AdMobManager : MonoBehaviour
     {
         Debug.Log("VideoAdLoad Start");
         //string adUnitId = "ca-app-pub-3940256099942544/5224354917";
-        string adUnitId = "ca-app-pub-6915619357801525/5075173068";
+        string adUnitId = "ca-app-pub-6915619357801525/1831702677";
 
         AdRequest adRequest = new AdRequest.Builder().Build();
         // Create a 320x50 banner at the top of the screen.

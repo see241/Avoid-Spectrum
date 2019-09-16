@@ -243,8 +243,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/Administrator/Desktop/Projects/Void-Spectrum/AvoidSpectrumKeyStore.keystore
+  AndroidKeyaliasName: keystore
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   AndroidEnableTango: 0
