@@ -14,6 +14,12 @@ public class MenuManager : MonoBehaviour
     public Button changeJoyStick;
     public GameObject joystickTestPlayer;
     public GameObject touchTestPlayer;
+    public InputField inputField;
+
+    private string emailAdress = "ysj_business@naver.com";
+    private string emailSubject;
+    private string emailBody;
+    private string ReportType = "버그 제보";
 
     public int index
     {
@@ -149,5 +155,31 @@ public class MenuManager : MonoBehaviour
     public void DifficultyToExpert()
     {
         InGameManager.instance.difficulty = Difficulty.Expert;
+    }
+
+    public void InputFieldToggle()
+    {
+        inputField.gameObject.SetActive(!inputField.gameObject.active);
+    }
+
+    public void Report()
+    {
+        emailAdress = EscapeURL(emailAdress);
+        emailSubject = EscapeURL(System.DateTime.Now + " " + ReportType);
+        emailBody = EscapeURL(inputField.text);
+        inputField.text = "";
+        inputField.gameObject.SetActive(false);
+        Toast.ShowToastMessage("소중한 의견 감사합니다");
+        Application.OpenURL("mailto:" + emailAdress + "?subject=" + emailSubject + "&body=" + emailBody);
+    }
+
+    public void ReportTypeSet(string str)
+    {
+        ReportType = str;
+    }
+
+    public string EscapeURL(string url)
+    {
+        return UnityEngine.Networking.UnityWebRequest.EscapeURL(url).Replace("+", "%20");
     }
 }

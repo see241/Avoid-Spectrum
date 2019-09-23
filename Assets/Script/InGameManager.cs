@@ -236,6 +236,7 @@ public class InGameManager : MonoBehaviour
     public void AddAdGold()
     {
         int addgold = UnityEngine.Random.Range(15, 31);
+        Toast.ShowToastMessage(addgold + "만큼 비트를 획득하였습니다.");
         Gold += addgold;
     }
 

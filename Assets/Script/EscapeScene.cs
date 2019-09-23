@@ -11,7 +11,7 @@ public class EscapeScene : MonoBehaviour
             switch (InGameManager.instance.state)
             {
                 case GameState.Main:
-                    Application.Quit();
+                    StartCoroutine(ApplicationQuit());
                     break;
 
                 case GameState.Menu:
@@ -37,5 +37,19 @@ public class EscapeScene : MonoBehaviour
                     InGameManager.instance.state = GameState.Menu;
                     break;
             }
+    }
+
+    private IEnumerator ApplicationQuit()
+    {
+        Toast.ShowToastMessage("'뒤로'버튼을 한번 더 누르면 종료됩니다.");
+        float t = Time.time;
+        while (t + 2 > Time.time)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+            yield return null;
+        }
     }
 }
